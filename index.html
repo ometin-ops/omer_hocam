@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ömer Hoca — Özel Ders & Koçluk</title>
+  <meta name="description" content="Ömer Hoca ile özel ders, öğrenci koçluğu ve kampüs programlarıyla başarıya ulaş. Deneyimli eğitim, kişisel gelişim odaklı yaklaşım." />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts — Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            inter: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            coral: {
+              DEFAULT: '#CC4400',
+              light: '#E05020',
+              dark:  '#A33800',
+            },
+          },
+          borderRadius: {
+            '4xl': '2rem',
+            '5xl': '2.5rem',
+          },
+          keyframes: {
+            fadeUp: {
+              '0%':   { opacity: '0', transform: 'translateY(28px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            slideIn: {
+              '0%':   { opacity: '0', transform: 'translateX(28px)' },
+              '100%': { opacity: '1', transform: 'translateX(0)' },
+            },
+            marqueeUp: {
+              '0%':   { transform: 'translateY(0)' },
+              '100%': { transform: 'translateY(-50%)' },
+            },
+            marqueeDown: {
+              '0%':   { transform: 'translateY(-50%)' },
+              '100%': { transform: 'translateY(0)' },
+            },
+            floatSlow: {
+              '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+              '50%':      { transform: 'translateY(-14px) rotate(4deg)' },
+            },
+          },
+          animation: {
+            'fade-up':      'fadeUp 0.7s ease forwards',
+            'slide-in':     'slideIn 0.7s ease 0.15s forwards',
+            'marquee-up':   'marqueeUp 22s linear infinite',
+            'marquee-down': 'marqueeDown 26s linear infinite',
+            'float-slow':   'floatSlow 4s ease-in-out infinite',
+            'float-slow2':  'floatSlow 5s ease-in-out 0.8s infinite',
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    /* Hide scrollbar for carousel */
+    .scrollbar-hide::-webkit-scrollbar { display: none; }
+    .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+    html, body {
+      overflow-x: hidden !important;
+      max-width: 100vw;
+      position: relative;
+      overscroll-behavior-x: none;
+    }
+    body { font-family: 'Inter', sans-serif; background: #f5f5f5; }
+
+    /* ── Navbar ── */
+    #navbar { transition: box-shadow 0.3s ease, background 0.3s ease; }
+    #navbar.scrolled {
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      background: rgba(255,255,255,0.97);
+    }
+
+    /* Nav link hover underline */
+    .nav-link { position: relative; padding-bottom: 4px; }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: 0;
+      width: 0; height: 2px;
+      background: #150338;
+      border-radius: 9999px;
+      transition: width 0.28s ease;
+    }
+    .nav-link:hover::after { width: 100%; }
+
+    /* Mobile menu */
+    #mobile-menu {
+      transition: max-height 0.35s ease, opacity 0.3s ease;
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+    }
+    #mobile-menu.open { max-height: 320px; opacity: 1; }
+
+    /* ── Hero ── */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(70px);
+      opacity: 0.18;
+      pointer-events: none;
+    }
+
+    /* ── Vertical Marquee Gallery ── */
+    .marquee-col {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      will-change: transform;
+    }
+    .marquee-col img {
+      width: 100%;          /* sütun genişliğine tam otur */
+      height: 210px;        /* SABİT yükseklik — taşmayı önler */
+      object-fit: cover;    /* kırparak doldur, oran bozulmaz */
+      border-radius: 0.875rem;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.28);
+      display: block;
+      flex-shrink: 0;
+    }
+    /* Pause on hover */
+    .marquee-wrapper:hover .marquee-col { animation-play-state: paused; }
+
+    /* Top/bottom fade mask — kenarlar yumuşak solar */
+    .gallery-fade-mask {
+      -webkit-mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        black 10%,
+        black 90%,
+        transparent 100%
+      );
+      mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        black 10%,
+        black 90%,
+        transparent 100%
+      );
+    }
+  </style>
+</head>
+
+<body class="antialiased w-full max-w-[100vw] overflow-x-hidden">
+
+  <!-- ══════════════════════════════════════════
+       NAVBAR
+  ══════════════════════════════════════════ -->
+  <header id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md">
+    <div class="w-full max-w-7xl mx-auto px-4 sm:px-8 py-2 md:py-3 flex items-center justify-between gap-6">
+
+      <!-- Logo ve Pika -->
+      <div class="flex items-center">
+        <a href="#hero" id="logo" class="flex items-center justify-start">
+          <img src="a15.png" alt="Ömer Hoca Logo" class="h-10 md:h-12 w-auto object-contain relative z-50">
+        </a>
+        <button onclick="document.getElementById('pika-modal').classList.remove('hidden')" class="flex items-center ml-6 md:ml-8 hover:scale-105 transition-transform focus:outline-none text-left">
+          <img src="a12.png" alt="" aria-hidden="true" class="w-12 h-12 md:w-14 md:h-14 object-contain">
+          <div class="ml-2 text-[10px] md:text-xs font-bold text-[#4e39f4] leading-tight">
+            Pika'nın sana<br>mesajı var!
+          </div>
+        </button>
+      </div>
+
+      <!-- Başla Butonu -->
+      <a href="#ozel-ders" class="bg-[#4f39f6] text-white px-5 py-2 md:px-6 md:py-2.5 rounded-full font-semibold text-sm md:text-base transition-transform hover:scale-105 active:scale-95 shadow-md">
+        Başla
+      </a>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden bg-white border-t border-gray-100">
+      <nav class="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-1">
+        <a href="#ozel-ders" class="py-2.5 px-3 rounded-xl text-sm font-semibold text-gray-700 hover:bg-indigo-50 hover:text-[#150338] transition-colors">Özel Ders</a>
+        <a href="#kocluk"    class="py-2.5 px-3 rounded-xl text-sm font-semibold text-gray-700 hover:bg-indigo-50 hover:text-[#150338] transition-colors">Koçluk</a>
+        <a href="#kampus"    class="py-2.5 px-3 rounded-xl text-sm font-semibold text-gray-700 hover:bg-indigo-50 hover:text-[#150338] transition-colors">Kampüs</a>
+        <a href="#iletisim"  class="py-2.5 px-3 rounded-xl text-sm font-semibold text-gray-700 hover:bg-indigo-50 hover:text-[#150338] transition-colors">İletişim</a>
+        <hr class="my-2 border-gray-100" />
+        <a href="#ozel-ders"
+           class="mt-1 text-center text-sm font-bold bg-[#4f39f6] text-white px-5 py-3 rounded-full
+                  hover:bg-[#4330d1] transition-all duration-200">
+          Hemen Başla
+        </a>
+      </nav>
+    </div>
+  </header>
+
+
+  <!-- ══════════════════════════════════════════
+       HERO SECTION
+  ══════════════════════════════════════════ -->
+  <main class="pt-16 md:pt-20">
+    <section id="hero" class="relative max-w-7xl mx-auto px-4 sm:px-8 pt-2 pb-5 md:pt-4 md:pb-7">
+
+      <!-- ░░ HERO WRAPPER — relative, süsler bu katmanda taşar ░░ -->
+      <div class="relative">
+
+        <!-- ─────────────────────────────────────────────────────────
+             3D Dekoratif Süsler — wrapper'a absolute, overflow-hidden'dan bağımsız
+        ───────────────────────────────────────────────────────── -->
+
+        <!-- Sağ Üst/Orta: a22.png (panda) -->
+        <img src="a22.png"
+             alt=""
+             aria-hidden="true"
+             class="absolute w-40 md:w-56 lg:w-64 max-w-full top-40 md:top-[35%] lg:top-[40%] -right-2 md:right-auto md:left-[28%] lg:left-[32%] z-20 pointer-events-none"
+             style="filter: drop-shadow(0 12px 28px rgba(0,0,0,0.22));" />
+
+        <!-- Sağ Alt: a11.png (spiral) -->
+        <img src="a11.png"
+             alt=""
+             aria-hidden="true"
+             class="absolute -bottom-10 -right-20 md:-right-28 w-40 md:w-56 max-w-full z-20 pointer-events-none"
+             style="filter: drop-shadow(0 12px 28px rgba(0,0,0,0.25));" />
+
+        <!-- ░░ HERO CARD — overflow-hidden sadece içeriği keser, süslere dokunmaz ░░ -->
+        <div class="relative overflow-hidden rounded-[2rem] md:rounded-[2.5rem]
+                    bg-[#1b004e]
+                    h-auto md:h-[600px]
+                    flex flex-col md:flex-row">
+
+          <!-- Decorative blobs -->
+          <div class="blob w-80  h-80  bg-orange-400  top-[-80px]  left-[-80px]"></div>
+          <div class="blob w-64  h-64  bg-red-800     bottom-[-40px] left-[25%]"></div>
+          <div class="blob w-48  h-48  bg-yellow-500  top-[20%]   left-[36%]"></div>
+
+          <!-- Sol içerik: mobilde p-6, masaüstü px-12 — mobilde üste -->
+          <div class="relative z-10 flex flex-col justify-center
+                      w-full md:w-1/2 flex-shrink-0 md:h-full
+                      px-6 pb-8 pt-10 md:px-12 md:py-0
+                      animate-fade-up opacity-0"
+               style="animation-fill-mode:forwards;">
+
+          <!-- Main heading — tam beyaz, iki satır -->
+          <h1 class="text-white font-black leading-[1.08] tracking-tight
+                     text-[2.4rem] sm:text-5xl md:text-[3.2rem]">
+            Başarıyı <span class="relative inline-block z-10">hedefleyenlere...
+              <svg class="absolute left-0 w-full h-3 -bottom-1 -z-10 pointer-events-none" viewBox="0 0 100 10" preserveAspectRatio="none">
+                <style>
+                  .draw-line {
+                    stroke-dasharray: 100;
+                    stroke-dashoffset: 100;
+                    animation: drawLine 4s infinite ease-in-out;
+                  }
+                  @keyframes drawLine {
+                    0%, 10% { stroke-dashoffset: 100; opacity: 0; }
+                    20% { opacity: 1; }
+                    50%, 70% { stroke-dashoffset: 0; opacity: 1; }
+                    90%, 100% { stroke-dashoffset: 100; opacity: 0; }
+                  }
+                </style>
+                <path class="draw-line" d="M2,5 Q50,8 98,3" stroke="#FBBF24" stroke-width="3" fill="transparent" stroke-linecap="round" />
+              </svg>
+            </span>
+          </h1>
+
+          <!-- Sub-text -->
+          <p class="mt-5 text-white/80 font-medium text-base
+                    leading-relaxed max-w-[360px] pr-28 sm:pr-32">
+            Öğrenciye özel hazırlanan yol haritası ve profesyonel rehberlikle hedeflerinize en doğru adımlarla ulaşın.
+          </p>
+
+          <!-- CTA Buttons -->
+          <div class="mt-8 flex items-center gap-4 flex-wrap">
+            <a href="#ozel-ders" id="hero-cta-btn"
+               class="inline-flex items-center gap-2 font-black text-[#150338] bg-white
+                      px-7 py-3.5 rounded-full text-base shadow-lg
+                      hover:bg-indigo-50 hover:shadow-xl hover:-translate-y-0.5
+                      active:scale-95 transition-all duration-200">
+              Hemen Başla
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="3"
+                   viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+
+        </div><!-- /left content -->
+
+          <!-- Sağ galeri: mobilde w-full h-[280px], masaüstü w-1/2 h-full -->
+          <div class="relative z-10 flex items-stretch
+                      w-full md:w-1/2 flex-shrink-0
+                      h-[280px] md:h-full
+                      overflow-hidden gallery-fade-mask
+                      py-3 px-3 md:py-5 md:pr-5 md:pl-2">
+
+          <!-- İki sütun yan yana, gap-3 aralarında, h-full ile yüksekliği doldur -->
+          <div class="marquee-wrapper flex gap-3 w-full h-full overflow-hidden">
+
+            <!-- COL 1 — yukarı kayar (22 sn) -->
+            <div class="flex-1 min-w-0 overflow-hidden h-full">
+              <div class="marquee-col animate-marquee-up">
+                <!-- Orijinal set -->
+                <img src="1.png" alt="Günlük Disiplin ve Takip"
+                     class="w-full h-auto object-cover" />
+                <img src="2.png" alt="Özel Hazırlanmış PDF'ler"
+                     class="w-full h-auto object-cover" />
+                <img src="3.png" alt="7/24 Soru Sorabilme"
+                     class="w-full h-auto object-cover" />
+                <!-- Seamless döngü için kopya -->
+                <img src="1.png" alt="" aria-hidden="true"
+                     class="w-full h-auto object-cover" />
+                <img src="2.png" alt="" aria-hidden="true"
+                     class="w-full h-auto object-cover" />
+                <img src="3.png" alt="" aria-hidden="true"
+                     class="w-full h-auto object-cover" />
+              </div>
+            </div>
+
+            <!-- COL 2 — aşağı kayar (26 sn) -->
+            <div class="flex-1 min-w-0 overflow-hidden h-full">
+              <div class="marquee-col animate-marquee-down">
+                <!-- Orijinal set -->
+                <img src="4.png" alt="Kitap ve Doküman Desteği"
+                     class="w-full h-auto object-cover" />
+                <img src="5.png" alt="Deneme Analizi ve Takibi"
+                     class="w-full h-auto object-cover" />
+                <!-- Seamless döngü için kopya -->
+                <img src="4.png" alt="" aria-hidden="true"
+                     class="w-full h-auto object-cover" />
+                <img src="5.png" alt="" aria-hidden="true"
+                     class="w-full h-auto object-cover" />
+              </div>
+            </div>
+
+          </div><!-- /marquee-wrapper -->
+
+        </div><!-- /right gallery -->
+
+        </div><!-- /hero card -->
+
+        <!-- ────────────────────────────────────────
+             AŞAĞI KAYDIR (SCROLL DOWN) İNDİKATÖRÜ
+        ──────────────────────────────────────── -->
+        <a href="#ozel-ders" class="absolute left-1/2 -bottom-10 transform -translate-x-1/2 z-30 animate-bounce flex items-center justify-center group" aria-label="Aşağı kaydır">
+          
+          <!-- Kavisli Yazı SVG (Curved Text) -->
+          <svg width="110" height="110" viewBox="0 0 110 110" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none group-hover:animate-[spin_4s_linear_infinite]">
+            <defs>
+              <path id="curvePath" d="M 55, 55 m -44, 0 a 44,44 0 1,1 88,0 a 44,44 0 1,1 -88,0" />
+            </defs>
+            <text fill="#ffffff" font-size="14" font-weight="800" letter-spacing="8" style="filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.3));">
+              <textPath href="#curvePath" startOffset="25%" text-anchor="middle">KEŞFET</textPath>
+            </text>
+          </svg>
+
+          <!-- Merkez Buton -->
+          <div class="w-16 h-16 bg-[#0fff94] rounded-full flex items-center justify-center text-[#1b004e] shadow-[0_8px_20px_rgba(0,0,0,0.4)] group-hover:scale-110 transition-transform duration-300">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+
+        </a>
+
+      </div><!-- /hero wrapper -->
+
+    </section><!-- /hero -->
+  </main>
+
+
+  <!-- ══════════════════════════════════════════
+       PLACEHOLDER SECTION ANCHORS (for nav links)
+  ══════════════════════════════════════════ -->
+    <section id="ozel-ders" class="py-20 md:py-24 bg-[#f3f1fa] relative rounded-3xl mx-4 md:mx-8 mb-12">
+    <div class="max-w-4xl mx-auto px-4 sm:px-8">
+      
+      <!-- Başlık -->
+      <div class="text-center mb-10 animate-fade-up">
+        <h2 class="text-3xl md:text-4xl font-black text-[#1b004e] mb-4 tracking-tight">Hangi sınava hazırlanıyorsun?</h2>
+        <p class="text-gray-600 text-base md:text-lg">Seçimini yaparak sana uygun programın detaylarını inceleyebilirsin.</p>
+      </div>
+
+      <!-- Sekmeler (Tabs) -->
+      <div class="flex justify-center mb-8">
+        <div class="bg-white rounded-full shadow-sm p-1.5 flex items-center gap-1 border border-gray-100">
+          <button onclick="showTab('lgs')" id="tab-btn-lgs" class="tab-btn px-6 py-2.5 rounded-full font-bold text-sm transition-all duration-200 bg-[#4f39f6] text-white shadow-md">LGS</button>
+          <button onclick="showTab('yks')" id="tab-btn-yks" class="tab-btn px-6 py-2.5 rounded-full font-bold text-sm transition-all duration-200 text-gray-700 hover:bg-gray-50">YKS</button>
+          <button onclick="showTab('arasinif')" id="tab-btn-arasinif" class="tab-btn px-6 py-2.5 rounded-full font-bold text-sm transition-all duration-200 text-gray-700 hover:bg-gray-50">Ara Sınıf</button>
+        </div>
+      </div>
+
+      <!-- Paket Kartı -->
+      <div class="bg-white rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.08)] p-6 md:p-10 relative animate-fade-up max-w-2xl mx-auto border-2 border-[#4f39f6]">
+        
+        <!-- Sol Üst Dekoratif Süs -->
+        <img src="a8.png" alt="" aria-hidden="true" class="absolute -top-10 md:-top-14 -left-10 md:-left-14 z-10 w-28 h-28 md:w-36 md:h-36 object-contain pointer-events-none" />
+
+        <!-- Rozet -->
+        <div class="absolute top-0 right-0 -mt-[2px] -mr-[2px] bg-[#4f39f6] text-white px-5 py-2.5 rounded-tr-[2rem] rounded-bl-[1.5rem] text-sm font-bold flex items-center gap-1.5 shadow-md">
+          <span id="paket-rozet" class="flex items-center gap-1.5">👍 En Popüler</span>
+        </div>
+
+        <!-- Kart Başlık & Fiyat -->
+        <div class="mb-8 pl-12 pt-4 md:pl-0 md:pt-0">
+          <h3 id="paket-baslik" class="text-2xl md:text-3xl font-black text-gray-900 mb-2">LGS Özel Ders</h3>
+          <div class="flex items-end gap-2">
+            <span class="text-4xl font-black text-[#150338]">₺3.550</span>
+            <span class="text-gray-500 font-medium pb-1">/ 4 Hafta</span>
+          </div>
+          <p class="text-gray-500 text-sm mt-3 font-medium">Hedeflerine ulaşmanda tam da ihtiyacın olan destek.</p>
+        </div>
+
+        <!-- LGS İçerik (Varsayılan Görünür) -->
+        <ul id="content-lgs" class="space-y-4 mb-10 block">
+          <li class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-[#4f39f6] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <span class="text-gray-700 font-medium">Öğrenciye özel PDF'ler</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-[#4f39f6] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <span class="text-gray-700 font-medium">Kitap ve doküman desteği</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-[#4f39f6] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <span class="text-gray-700 font-medium">Düzenli deneme ve takibi</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-[#4f39f6] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <span class="text-gray-700 font-medium">Online kütüphane ile beraber ders çalışma</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-[#4f39f6] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <span class="text-gray-700 font-medium">7/24 soru sorabilme</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-[#4f39f6] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <span class="text-gray-700 font-medium">Ücretsiz tanışma dersi</span>
+          </li>
+        </ul>
+
+        <!-- YKS İçerik (Gizli) -->
+        <ul id="content-yks" class="space-y-4 mb-10 hidden">
+          <li class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-[#4f39f6] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <span class="text-gray-700 font-medium">Öğrenciye özel PDF'ler</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-[#4f39f6] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <span class="text-gray-700 font-medium">Kitap ve doküman desteği</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-[#4f39f6] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <span class="text-gray-700 font-medium">Düzenli deneme ve takibi</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-[#4f39f6] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <span class="text-gray-700 font-medium">Online kütüphane ile beraber ders çalışma</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-[#4f39f6] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <span class="text-gray-700 font-medium">7/24 soru sorabilme</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-[#4f39f6] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <span class="text-gray-700 font-medium">Ücretsiz tanışma dersi</span>
+          </li>
+        </ul>
+
+        <!-- Ara Sınıf İçerik (Gizli) -->
+        <ul id="content-arasinif" class="space-y-4 mb-10 hidden">
+          <li class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-[#4f39f6] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <span class="text-gray-700 font-medium">Maarif modele uygun PDF'ler</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-[#4f39f6] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <span class="text-gray-700 font-medium">Yazılılara özel kamplar</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-[#4f39f6] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <span class="text-gray-700 font-medium">Kitap ve doküman desteği</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-[#4f39f6] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <span class="text-gray-700 font-medium">Düzenli deneme ve takibi</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-[#4f39f6] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <span class="text-gray-700 font-medium">7/24 soru sorabilme</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-[#4f39f6] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <span class="text-gray-700 font-medium">Ücretsiz tanışma dersi</span>
+          </li>
+        </ul>
+
+        <!-- Buton -->
+        <button class="w-full bg-[#4f39f6] text-white py-4 rounded-[1rem] font-bold text-lg hover:bg-[#3d2bc4] transition-colors shadow-lg shadow-[#4f39f6]/20 active:scale-[0.98]">
+          Ücretsiz Derse Başla
+        </button>
+
+        <!-- Görsel Alanı (Placeholder) -->
+        <div class="mt-6 w-full h-48 sm:h-56 bg-gray-50 rounded-xl overflow-hidden relative border border-gray-100 shadow-inner">
+          <img src="ozel-ders-gorseli.jpg" alt="Özel Ders" class="w-full h-full object-cover">
+          <div class="absolute inset-0 flex items-center justify-center text-gray-400 text-sm font-medium border-2 border-dashed border-gray-200 rounded-xl m-1">
+            [ Özel Ders Görseli Buraya Gelecek ]
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- ══════════════════════════════════════════
+       KOÇLUK SECTION
+  ══════════════════════════════════════════ -->
+  <section id="kocluk" class="py-20 md:py-24 bg-[#f3f1fa] relative rounded-3xl mx-4 md:mx-8 mb-12">
+    <div class="max-w-4xl mx-auto px-4 sm:px-8">
+      
+      <!-- Başlık -->
+      <div class="text-center mb-10 animate-fade-up">
+        <h2 class="text-3xl md:text-4xl font-black text-[#1b004e] mb-4 tracking-tight">Sana Özel Birebir Koçluk Programı</h2>
+        <p class="text-gray-600 text-base md:text-lg">Hedeflerine ulaşman için sana özel hazırlanan, adım adım seni başarıya götürecek birebir program.</p>
+      </div>
+
+      <!-- Koçluk Kartı -->
+      <div class="bg-white rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.08)] p-6 md:p-10 relative animate-fade-up max-w-2xl mx-auto border-2 border-[#4f39f6]">
+        
+        <!-- Sol Üst Dekoratif Süs -->
+        <img src="a8.png" alt="" aria-hidden="true" class="absolute -top-10 md:-top-14 -left-10 md:-left-14 z-10 w-28 h-28 md:w-36 md:h-36 object-contain pointer-events-none" />
+
+        <!-- Rozet -->
+        <div class="absolute top-0 right-0 -mt-[2px] -mr-[2px] bg-[#4f39f6] text-white px-5 py-2.5 rounded-tr-[2rem] rounded-bl-[1.5rem] text-sm font-bold flex items-center gap-1.5 shadow-md">
+          <span class="flex items-center gap-1.5">👍 En Popüler</span>
+        </div>
+
+        <!-- Kart Başlık & Fiyat -->
+        <div class="mb-8 pl-12 pt-4 md:pl-0 md:pt-0">
+          <h3 class="text-2xl md:text-3xl font-black text-gray-900 mb-2">Öğrenci Koçluğu</h3>
+          <div class="flex items-end gap-2">
+            <span class="text-4xl font-black text-[#150338]">₺2.500</span>
+            <span class="text-gray-500 font-medium pb-1">/ Aylık</span>
+          </div>
+          <p class="text-gray-500 text-sm mt-3 font-medium">Hedeflerine ulaşmanda tam da ihtiyacın olan profesyonel destek.</p>
+        </div>
+
+        <!-- Liste -->
+        <ul class="space-y-4 mb-10">
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-[#4f39f6] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <span class="text-gray-700 font-medium">Haftada 2 kez görüşme</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-[#4f39f6] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <span class="text-gray-700 font-medium">Online kütüphanede beraber ders çalışma</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-[#4f39f6] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <span class="text-gray-700 font-medium">Planlama defteri ve doküman hediyesi</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-[#4f39f6] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <span class="text-gray-700 font-medium">Haftalık, aylık raporlar</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-[#4f39f6] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <span class="text-gray-700 font-medium">7/24 mesajlaşma</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-[#4f39f6] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <span class="text-gray-700 font-medium">Ücretsiz tanışma ve görüşme</span>
+          </li>
+        </ul>
+
+        <!-- Buton -->
+        <button class="w-full bg-[#4f39f6] text-white py-4 rounded-[1rem] font-bold text-lg hover:bg-[#3d2bc4] transition-colors shadow-lg shadow-[#4f39f6]/20 active:scale-[0.98]">
+          Ücretsiz Tanışma Görüşmesi Başlat
+        </button>
+
+        <!-- Resim Alanı (Placeholder) -->
+        <div class="mt-8 aspect-video rounded-xl overflow-hidden bg-gray-100 flex items-center justify-center border border-gray-200">
+          <img src="kocluk-gorsel.jpg" alt="Koçluk Görseli" class="w-full h-full object-cover text-gray-400 font-medium flex items-center justify-center text-center p-4">
+        </div>
+
+        <!-- Değerlendirme (Sosyal Kanıt) -->
+        <div class="mt-5 flex items-center justify-center gap-2">
+          <div class="flex text-yellow-400">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+          </div>
+          <span class="text-sm md:text-base font-semibold text-gray-500">100+ öğrenci satın aldı</span>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+  <!-- ══════════════════════════════════════════
+       KAMPÜS SECTION
+  ══════════════════════════════════════════ -->
+  <section id="kampus" class="max-w-7xl mx-auto px-4 my-20">
+    <a href="https://whatsapp.com/channel/0029VbCjF055a246ZyeeUh1I" target="_blank" rel="noopener noreferrer" class="block w-full transition-transform hover:scale-[1.02]">
+      <!-- Masaüstü Görseli (Geniş Ekranlar İçin) -->
+      <img src="wpkanal.png" alt="Ömer Hoca Kampüs Masaüstü" class="hidden md:block w-full h-auto object-cover rounded-2xl shadow-2xl">
+      <!-- Mobil Görsel (Telefon Ekranları İçin) -->
+      <img src="a5.png" alt="Ömer Hoca Kampüs Mobil" class="block md:hidden w-full h-auto object-cover rounded-2xl shadow-xl">
+    </a>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       YORUMLAR (TESTIMONIALS) SECTION
+  ══════════════════════════════════════════ -->
+  <section id="yorumlar" class="max-w-7xl mx-auto px-4 py-20">
+    
+    <!-- Başlık & Açıklama -->
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-black text-[#150338] mb-4">Öğrencilerimiz ve Velilerimiz Ne Diyor?</h2>
+      <p class="text-gray-500 font-medium max-w-2xl mx-auto">Birlikte başarıya ulaştığımız öğrencilerimizin ve velilerimizin deneyimleri...</p>
+    </div>
+
+    <!-- Carousel Kapsayıcısı -->
+    <div id="testimonial-carousel" class="flex md:grid md:grid-cols-3 gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-8">
+      
+      <!-- 1. Kart -->
+      <div class="bg-[#f8f7fc] rounded-2xl p-8 min-w-[85vw] md:min-w-0 snap-center flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+        <div>
+          <!-- Tırnak İkonu -->
+          <svg class="w-10 h-10 text-[#4f39f6] mb-4 opacity-80" fill="currentColor" viewBox="0 0 32 32">
+            <path d="M10 8c-3.3 0-6 2.7-6 6v10h10V14H8c0-1.1.9-2 2-2h4V8h-4zm16 0c-3.3 0-6 2.7-6 6v10h10V14h-6c0-1.1.9-2 2-2h4V8h-4z"/>
+          </svg>
+          <p class="text-gray-700 leading-relaxed font-medium mb-8">
+            "YKS hazırlık sürecinde online kütüphane ve düzenli deneme takibi sayesinde kızım büyük bir ivme kazandı. Sadece ders anlatmakla kalmayıp sürekli moral veren bir rehberle çalışmak bizi çok rahatlattı."
+          </p>
+        </div>
+        <div>
+          <h4 class="font-bold text-[#4f39f6] mb-2">Ayşe Hanım</h4>
+          <span class="inline-block bg-[#0fff94] text-black text-[10px] font-bold px-3 py-1 rounded-full tracking-wider">VELİ</span>
+        </div>
+      </div>
+
+      <!-- 2. Kart -->
+      <div class="bg-[#f8f7fc] rounded-2xl p-8 min-w-[85vw] md:min-w-0 snap-center flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+        <div>
+          <!-- Tırnak İkonu -->
+          <svg class="w-10 h-10 text-[#4f39f6] mb-4 opacity-80" fill="currentColor" viewBox="0 0 32 32">
+            <path d="M10 8c-3.3 0-6 2.7-6 6v10h10V14H8c0-1.1.9-2 2-2h4V8h-4zm16 0c-3.3 0-6 2.7-6 6v10h10V14h-6c0-1.1.9-2 2-2h4V8h-4z"/>
+          </svg>
+          <p class="text-gray-700 leading-relaxed font-medium mb-8">
+            "Gecenin bir yarısı bile soru sorduğumda dönüş alabilmek ve bana özel hazırlanan PDF kaynaklarla çalışmak çok verimliydi. Eksiklerimi hocamızın birebir takibi sayesinde nokta atışı kapatabildim."
+          </p>
+        </div>
+        <div>
+          <h4 class="font-bold text-[#4f39f6] mb-2">Mehmet Yılmaz</h4>
+          <span class="inline-block bg-[#0fff94] text-black text-[10px] font-bold px-3 py-1 rounded-full tracking-wider">YKS ÖĞRENCİSİ</span>
+        </div>
+      </div>
+
+      <!-- 3. Kart -->
+      <div class="bg-[#f8f7fc] rounded-2xl p-8 min-w-[85vw] md:min-w-0 snap-center flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+        <div>
+          <!-- Tırnak İkonu -->
+          <svg class="w-10 h-10 text-[#4f39f6] mb-4 opacity-80" fill="currentColor" viewBox="0 0 32 32">
+            <path d="M10 8c-3.3 0-6 2.7-6 6v10h10V14H8c0-1.1.9-2 2-2h4V8h-4zm16 0c-3.3 0-6 2.7-6 6v10h10V14h-6c0-1.1.9-2 2-2h4V8h-4z"/>
+          </svg>
+          <p class="text-gray-700 leading-relaxed font-medium mb-8">
+            "LGS matematik netlerim Ömer Hoca sayesinde inanılmaz bir hızla arttı. Yeni nesil soruları görünce panikliyordum ama şimdi adım adım nasıl çözeceğimi biliyorum. Çok teşekkür ederim."
+          </p>
+        </div>
+        <div>
+          <h4 class="font-bold text-[#4f39f6] mb-2">Zeynep K.</h4>
+          <span class="inline-block bg-[#0fff94] text-black text-[10px] font-bold px-3 py-1 rounded-full tracking-wider">LGS ÖĞRENCİSİ</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Yön Butonları (Navigasyon) -->
+    <div class="flex items-center justify-center gap-4 mt-2 md:mt-4">
+      <button onclick="document.getElementById('testimonial-carousel').scrollBy({left: -320, behavior: 'smooth'})" class="w-12 h-12 flex items-center justify-center rounded-full bg-[#4f39f6] text-white hover:bg-opacity-90 transition-colors shadow-lg focus:outline-none focus:ring-2 focus:ring-[#4f39f6] focus:ring-offset-2">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+      </button>
+      <button onclick="document.getElementById('testimonial-carousel').scrollBy({left: 320, behavior: 'smooth'})" class="w-12 h-12 flex items-center justify-center rounded-full bg-[#4f39f6] text-white hover:bg-opacity-90 transition-colors shadow-lg focus:outline-none focus:ring-2 focus:ring-[#4f39f6] focus:ring-offset-2">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+      </button>
+    </div>
+
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       SSS (FAQ) SECTION
+  ══════════════════════════════════════════ -->
+  <section id="sss" class="max-w-3xl mx-auto px-4 py-20 w-full">
+    
+    <!-- Başlık & Açıklama -->
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-black text-[#150338] mb-4">Sıkça Sorulan Sorular</h2>
+      <p class="text-gray-500 font-medium max-w-2xl mx-auto">Matematik yolculuğun hakkında merak edilenleri senin için derledik.</p>
+    </div>
+
+    <!-- Akordeon Kapsayıcısı -->
+    <div class="space-y-4">
+      
+      <!-- Soru 1 -->
+      <div class="bg-[#f8f7fc] rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+        <button class="w-full px-6 py-5 text-left flex items-center justify-between focus:outline-none" onclick="toggleAccordion('faq1')">
+          <span class="font-bold text-gray-900 pr-4">Yüz yüze dersleri nerede veriyorsunuz? Online eğitiminiz var mı?</span>
+          <svg id="icon-faq1" class="w-5 h-5 text-[#150338] transform transition-transform duration-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </button>
+        <div id="faq1" class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+          <div class="px-6 pb-5 text-gray-600 font-medium">
+            Yüz yüze özel derslerimi Bolu merkez ve çevresinde gerçekleştiriyorum. Ayrıca Türkiye'nin her yerinden öğrencilerim için online matematik özel dersi ve öğrenci koçluğu hizmeti sunuyorum.
+          </div>
+        </div>
+      </div>
+
+      <!-- Soru 2 -->
+      <div class="bg-[#f8f7fc] rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+        <button class="w-full px-6 py-5 text-left flex items-center justify-between focus:outline-none" onclick="toggleAccordion('faq2')">
+          <span class="font-bold text-gray-900 pr-4">Bir ders saati kaç dakika sürüyor?</span>
+          <svg id="icon-faq2" class="w-5 h-5 text-[#150338] transform transition-transform duration-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </button>
+        <div id="faq2" class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+          <div class="px-6 pb-5 text-gray-600 font-medium">
+            Derslerimizin verimliliğini maksimumda tutmak için bir ders saatimiz öğrencinin odak süresine göre değişmekle birlikte genelde 60+30 veya 60 dakika gibi planlanmaktadır.
+          </div>
+        </div>
+      </div>
+
+      <!-- Soru 3 -->
+      <div class="bg-[#f8f7fc] rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+        <button class="w-full px-6 py-5 text-left flex items-center justify-between focus:outline-none" onclick="toggleAccordion('faq3')">
+          <span class="font-bold text-gray-900 pr-4">Sadece LGS ve YKS öğrencilerine mi ders veriyorsunuz?</span>
+          <svg id="icon-faq3" class="w-5 h-5 text-[#150338] transform transition-transform duration-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </button>
+        <div id="faq3" class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+          <div class="px-6 pb-5 text-gray-600 font-medium">
+            Hayır, 5. sınıftan 11. sınıfa kadar tüm ara sınıf öğrencilerine ve tabii ki LGS ile YKS hazırlık gruplarına matematik dersi veriyorum.
+          </div>
+        </div>
+      </div>
+
+      <!-- Soru 4 -->
+      <div class="bg-[#f8f7fc] rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+        <button class="w-full px-6 py-5 text-left flex items-center justify-between focus:outline-none" onclick="toggleAccordion('faq4')">
+          <span class="font-bold text-gray-900 pr-4">Derslerde hangi kaynakları kullanıyorsunuz?</span>
+          <svg id="icon-faq4" class="w-5 h-5 text-[#150338] transform transition-transform duration-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </button>
+        <div id="faq4" class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+          <div class="px-6 pb-5 text-gray-600 font-medium">
+            Öğrencinin seviye tespitini yaptıktan sonra piyasadaki en nitelikli yayınlardan oluşan kişiye özel bir kaynak listesi oluşturuyorum. Ayrıca kendi hazırladığım yeni nesil soru bankası havuzundan ve interaktif içeriklerden de faydalanıyoruz.
+          </div>
+        </div>
+      </div>
+
+      <!-- Soru 5 -->
+      <div class="bg-[#f8f7fc] rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+        <button class="w-full px-6 py-5 text-left flex items-center justify-between focus:outline-none" onclick="toggleAccordion('faq5')">
+          <span class="font-bold text-gray-900 pr-4">Sürece başlamadan önce bir tanışma veya deneme dersi yapıyor musunuz?</span>
+          <svg id="icon-faq5" class="w-5 h-5 text-[#150338] transform transition-transform duration-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </button>
+        <div id="faq5" class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+          <div class="px-6 pb-5 text-gray-600 font-medium">
+            Evet, öğrenciyle aramızdaki uyumu görmek ve mevcut seviyesini analiz etmek için "ücretsiz" bir tanışma ve seviye tespit görüşmesi gerçekleştiriyoruz. Bu görüşme sonrasında kişiye özel yol haritamızı çiziyoruz.
+          </div>
+        </div>
+      </div>
+
+      <!-- Soru 6 -->
+      <div class="bg-[#f8f7fc] rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+        <button class="w-full px-6 py-5 text-left flex items-center justify-between focus:outline-none" onclick="toggleAccordion('faq6')">
+          <span class="font-bold text-gray-900 pr-4">İptal hakkı var mı?</span>
+          <svg id="icon-faq6" class="w-5 h-5 text-[#150338] transform transition-transform duration-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </button>
+        <div id="faq6" class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+          <div class="px-6 pb-5 text-gray-600 font-medium">
+            Evet, eğer ilk hafta içinde memnun kalmazsanız ücretiniz iade yapılmaktadır.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       İLETİŞİM (CONTACT) SECTION
+  ══════════════════════════════════════════ -->
+  <section id="iletisim" class="py-24 bg-white relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8 items-center">
+        
+        <!-- Sol Sütun: Bilgiler & Sosyal Medya -->
+        <div class="animate-fade-up">
+          <h2 class="text-4xl md:text-5xl font-black text-[#150338] mb-6 leading-tight tracking-tight">Birlikte Başaralım!</h2>
+          <p class="text-gray-600 text-lg md:text-xl mb-10 leading-relaxed font-medium">LGS ve YKS maratonunda, veya ara sınıf matematik serüveninde aklınıza takılan her şey için bana yazabilirsiniz.</p>
+          
+          <a href="https://www.instagram.com/omerhoca.tv/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 bg-[#4f39f6] text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-[#4330d1] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 w-fit">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd" />
+            </svg>
+            Instagram'da Takip Et
+          </a>
+        </div>
+
+        <!-- Sağ Sütun: Form -->
+        <div class="bg-white rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.08)] p-8 sm:p-10 border border-gray-100 animate-fade-up relative">
+          
+          <form onsubmit="sendEmail(event)" class="space-y-6">
+            
+            <!-- Ad ve Soyad (Yan yana) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div>
+                <label for="ad" class="block text-sm font-bold text-gray-700 mb-2">Adınız</label>
+                <input type="text" id="ad" name="Ad" class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:outline-none focus:border-[#150338] focus:ring-2 focus:ring-[#150338]/20 transition-all font-medium text-gray-900" placeholder="Örn: Ahmet" required>
+              </div>
+              <div>
+                <label for="soyad" class="block text-sm font-bold text-gray-700 mb-2">Soyadınız</label>
+                <input type="text" id="soyad" name="Soyad" class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:outline-none focus:border-[#150338] focus:ring-2 focus:ring-[#150338]/20 transition-all font-medium text-gray-900" placeholder="Örn: Yılmaz" required>
+              </div>
+            </div>
+
+            <!-- Öğrenci/Veli Seçimi -->
+            <div>
+              <label for="rol" class="block text-sm font-bold text-gray-700 mb-2">Öğrenci misiniz, Veli misiniz?</label>
+              <select id="rol" name="Rol" class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:outline-none focus:border-[#150338] focus:ring-2 focus:ring-[#150338]/20 transition-all font-medium text-gray-900 appearance-none" required>
+                <option value="" disabled selected>Seçiniz</option>
+                <option value="Öğrenci">Öğrenci</option>
+                <option value="Veli">Veli</option>
+              </select>
+            </div>
+
+            <!-- Telefon -->
+            <div>
+              <label for="telefon" class="block text-sm font-bold text-gray-700 mb-2">Telefon Numarası</label>
+              <input type="tel" id="telefon" name="Telefon" class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:outline-none focus:border-[#150338] focus:ring-2 focus:ring-[#150338]/20 transition-all font-medium text-gray-900" placeholder="0 (5__) ___ __ __" required>
+            </div>
+
+            <!-- Mesaj -->
+            <div>
+              <label for="mesaj" class="block text-sm font-bold text-gray-700 mb-2">Nasıl yardımcı olabilirim?</label>
+              <textarea id="mesaj" name="Mesaj" rows="4" class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:outline-none focus:border-[#150338] focus:ring-2 focus:ring-[#150338]/20 transition-all font-medium text-gray-900 resize-none" placeholder="Mesajınızı buraya yazabilirsiniz..." required></textarea>
+            </div>
+
+            <!-- Gönder Butonu -->
+            <button type="submit" class="w-full bg-[#4f39f6] text-white py-4 rounded-xl font-bold text-lg hover:bg-[#4330d1] transition-colors shadow-lg shadow-[#4f39f6]/20 active:scale-[0.98]">
+              Gönder
+            </button>
+            
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════ -->
+  <footer class="bg-[#150338] rounded-t-3xl px-6 py-12 md:px-16 md:py-16 mt-0 relative overflow-visible">
+
+    <!-- Sol Üst Dekoratif Görsel -->
+    <img src="a8.png" alt="" aria-hidden="true" class="absolute -top-8 -left-8 w-32 h-32 md:w-40 md:h-40 object-contain z-0 pointer-events-none" />
+
+    <!-- Sağ Üst Dekoratif Görsel -->
+    <img src="a9.png" alt="" aria-hidden="true" class="absolute -top-8 -right-8 w-32 h-32 md:w-40 md:h-40 object-contain z-0 pointer-events-none" />
+
+    <div class="relative z-10 max-w-7xl mx-auto">
+
+      <!-- 4 Sütun Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+        <!-- 1. Sütun: Marka -->
+        <div class="flex flex-col gap-4">
+          <img src="a6.png" alt="Ömer Hoca Logo" class="h-14 w-auto object-contain self-start brightness-0 invert">
+          <p class="text-gray-300 text-sm leading-relaxed">
+            Ömer Hoca'yla hazır ol,<br>fark yarat.
+          </p>
+        </div>
+
+        <!-- 2. Sütun: Hizmetler -->
+        <div class="flex flex-col gap-5">
+          <div>
+            <h4 class="text-white font-bold text-sm uppercase tracking-widest mb-3">Programlar</h4>
+            <ul class="space-y-2 text-gray-300 text-sm">
+              <li><a href="#kocluk" class="hover:text-white transition-colors">Koçluk</a></li>
+              <li><a href="#ozel-ders" class="hover:text-white transition-colors">LGS Özel Ders</a></li>
+              <li><a href="#ozel-ders" class="hover:text-white transition-colors">YKS Özel Ders</a></li>
+              <li><a href="#ozel-ders" class="hover:text-white transition-colors">Ara Sınıf</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-white font-bold text-sm uppercase tracking-widest mb-3">Hızlı Linkler</h4>
+            <ul class="space-y-2 text-gray-300 text-sm">
+              <li><a href="#kampus" class="hover:text-white transition-colors">Hakkımda</a></li>
+              <li><a href="#iletisim" class="hover:text-white transition-colors">İletişim</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 3. Sütun: Sözleşme ve Koşullar -->
+        <div>
+          <h4 class="text-white font-bold text-sm uppercase tracking-widest mb-4">Yasal</h4>
+          <ul class="space-y-2.5 text-gray-300 text-sm">
+            <li><a href="#" class="hover:text-white transition-colors">Mesafeli Satış Sözleşmesi</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">İptal İade Koşulları</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">KVKK Aydınlatma Metni</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Çerez Politikası</a></li>
+          </ul>
+        </div>
+
+        <!-- 4. Sütun: İletişim & Sosyal Medya -->
+        <div>
+          <h4 class="text-white font-bold text-sm uppercase tracking-widest mb-4">Bize Ulaşın</h4>
+          <div class="flex items-center gap-4">
+
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/omerhoca.tv/" target="_blank" rel="noopener noreferrer"
+               aria-label="Instagram"
+               class="w-11 h-11 rounded-xl bg-white/10 flex items-center justify-center text-gray-300 hover:text-white hover:bg-white/20 hover:scale-110 transition-all duration-200">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+            </a>
+
+            <!-- WhatsApp -->
+            <a href="https://wa.me/905000000000" target="_blank" rel="noopener noreferrer"
+               aria-label="WhatsApp"
+               class="w-11 h-11 rounded-xl bg-white/10 flex items-center justify-center text-gray-300 hover:text-white hover:bg-white/20 hover:scale-110 transition-all duration-200">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+            </a>
+
+            <!-- E-posta -->
+            <a href="mailto:omerhocatv@gmail.com"
+               aria-label="E-posta"
+               class="w-11 h-11 rounded-xl bg-white/10 flex items-center justify-center text-gray-300 hover:text-white hover:bg-white/20 hover:scale-110 transition-all duration-200">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+            </a>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Copyright Çizgisi -->
+      <div class="border-t border-white/10 mt-10 pt-8 text-center">
+        <p class="text-gray-400 text-xs">Copyright &copy; 2026 Ömer Hoca Mentörlük. Tüm hakları saklıdır.</p>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- ══════════════════════════════════════════
+       JS — Scroll & Hamburger
+  ══════════════════════════════════════════ -->
+  <script>
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 12) navbar.classList.add('scrolled');
+      else navbar.classList.remove('scrolled');
+    });
+
+    // Hamburger toggle
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const bars = hamburger.querySelectorAll('.ham-bar');
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      // Animate bars to X
+      if (isOpen) {
+        bars[0].style.transform = 'translateY(8px) rotate(45deg)';
+        bars[1].style.opacity   = '0';
+        bars[2].style.transform = 'translateY(-8px) rotate(-45deg)';
+        bars[2].style.width     = '1.5rem';
+      } else {
+        bars[0].style.transform = '';
+        bars[1].style.opacity   = '1';
+        bars[2].style.transform = '';
+        bars[2].style.width     = '1rem';
+      }
+    });
+
+    // Close mobile menu on link click
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        bars[0].style.transform = '';
+        bars[1].style.opacity   = '1';
+        bars[2].style.transform = '';
+        bars[2].style.width     = '1rem';
+      });
+    });
+
+        };
+
+    function changeTab(tabId) {
+      // Update buttons styling
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-[#150338]', 'text-white', 'active', 'shadow-md');
+        btn.classList.add('text-gray-700', 'hover:bg-gray-50');
+      });
+      const activeBtn = document.getElementById('tab-' + tabId);
+      activeBtn.classList.remove('text-gray-700', 'hover:bg-gray-50');
+      activeBtn.classList.add('bg-[#150338]', 'text-white', 'active', 'shadow-md');
+
+      // Update content
+      const data = tabData[tabId];
+      document.getElementById('paket-baslik').textContent = data.title;
+      document.getElementById('paket-rozet').textContent = data.badge;
+      document.getElementById('paket-degerlendirme').textContent = data.social;
+      
+      const listEl = document.getElementById('paket-liste');
+      listEl.innerHTML = '';
+      data.items.forEach(item => {
+        const li = document.createElement('li');
+        li.className = 'flex items-start gap-3';
+        li.innerHTML = `
+          <svg class="w-5 h-5 text-[#150338] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+          </svg>
+          <span class="text-gray-700 font-medium">${item}</span>
+        `;
+        listEl.appendChild(li);
+      });
+    }
+
+    // Initialize with LGS tab — try both ways to be safe
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => changeTab('lgs'));
+    } else {
+      changeTab('lgs');
+    }
+  </script>
+
+  <!-- ══════════════════════════════════════════
+       SABİT İLETİŞİM BUTONU (FAB) - EN DIŞ KATMAN
+  ══════════════════════════════════════════ -->
+  <div class="fixed right-0 top-1/2 transform -translate-y-1/2 z-[9999] flex">
+    <!-- Dalgalanma (Ping) Animasyonu Katmanı -->
+    <div class="absolute inset-0 bg-[#0fff94] rounded-l-xl animate-[ping_3s_cubic-bezier(0,0,0.2,1)_infinite] opacity-75"></div>
+    
+    <!-- Asıl Buton -->
+    <a href="#iletisim" class="relative flex flex-col items-center justify-center gap-1.5 md:gap-2 min-w-[40px] bg-[#0fff94] text-[#150338] py-3 px-2 md:py-5 md:px-3 rounded-l-xl shadow-2xl hover:bg-[#0ae382] transition-colors">
+      <!-- Telefon İkonu -->
+      <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+      </svg>
+      <!-- Dikey Yazı -->
+      <span class="font-bold text-xs md:text-sm tracking-widest [writing-mode:vertical-rl] rotate-180">İletişime Geç</span>
+    </a>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       MOBİL ALT NAVİGASYON (BOTTOM NAV)
+  ══════════════════════════════════════════ -->
+  <nav id="bottom-nav" class="md:hidden fixed bottom-0 left-0 w-full z-[100] bg-white rounded-t-3xl shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
+    <div class="flex justify-between items-end px-4 pb-2 pt-4">
+      
+      <!-- Ana Sayfa -->
+      <a href="#hero" class="nav-item flex flex-col items-center gap-1 text-[#150338] w-[20%]" data-target="hero">
+        <div class="icon-bg p-3 rounded-full transition-all duration-300 bg-[#4f39f6] text-white -translate-y-6 border-4 border-white shadow-lg">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+        </div>
+        <span class="text-[10px] font-bold transition-colors duration-300 -mt-5">Ana Sayfa</span>
+      </a>
+
+      <!-- Özel Ders -->
+      <a href="#ozel-ders" class="nav-item flex flex-col items-center gap-1 text-gray-400 w-[20%]" data-target="ozel-ders">
+        <div class="icon-bg p-2 rounded-full transition-all duration-300">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+        </div>
+        <span class="text-[10px] font-medium transition-colors duration-300">Özel Ders</span>
+      </a>
+
+      <!-- Koçluk -->
+      <a href="#kocluk" class="nav-item flex flex-col items-center gap-1 text-gray-400 w-[20%]" data-target="kocluk">
+        <div class="icon-bg p-2 rounded-full transition-all duration-300">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+        </div>
+        <span class="text-[10px] font-medium transition-colors duration-300">Koçluk</span>
+      </a>
+
+      <!-- Kampüs -->
+      <a href="#kampus" class="nav-item flex flex-col items-center gap-1 text-gray-400 w-[20%]" data-target="kampus">
+        <div class="icon-bg p-2 rounded-full transition-all duration-300">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+        </div>
+        <span class="text-[10px] font-medium transition-colors duration-300">Kampüs</span>
+      </a>
+
+      <!-- İletişim -->
+      <a href="#iletisim" class="nav-item flex flex-col items-center gap-1 text-gray-400 w-[20%]" data-target="iletisim">
+        <div class="icon-bg p-2 rounded-full transition-all duration-300">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+        </div>
+        <span class="text-[10px] font-medium transition-colors duration-300">İletişim</span>
+      </a>
+
+    </div>
+  </nav>
+
+  <!-- Alt Navigasyon Scroll Observer Logic -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const navItems = document.querySelectorAll('.nav-item');
+      const observerOptions = {
+        root: null,
+        rootMargin: '-30% 0px -70% 0px',
+        threshold: 0
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('id');
+            
+            navItems.forEach(item => {
+              item.classList.remove('text-[#150338]');
+              item.classList.add('text-gray-400');
+              const span = item.querySelector('span');
+              span.classList.remove('font-bold', '-mt-5');
+              span.classList.add('font-medium');
+              const iconBg = item.querySelector('.icon-bg');
+              iconBg.classList.remove('bg-[#4f39f6]', 'text-white', '-translate-y-6', 'border-4', 'border-white', 'shadow-lg', 'p-3');
+              iconBg.classList.add('p-2');
+            });
+            
+            const activeLink = document.querySelector(`.nav-item[data-target="${id}"]`);
+            if (activeLink) {
+              activeLink.classList.remove('text-gray-400');
+              activeLink.classList.add('text-[#150338]');
+              const span = activeLink.querySelector('span');
+              span.classList.remove('font-medium');
+              span.classList.add('font-bold', '-mt-5');
+              const iconBg = activeLink.querySelector('.icon-bg');
+              iconBg.classList.remove('p-2');
+              iconBg.classList.add('bg-[#4f39f6]', 'text-white', '-translate-y-6', 'border-4', 'border-white', 'shadow-lg', 'p-3');
+            }
+          }
+        });
+      }, observerOptions);
+
+      const targets = ['hero', 'ozel-ders', 'kocluk', 'kampus', 'iletisim'];
+      targets.forEach(targetId => {
+        const el = document.getElementById(targetId);
+        if (el) observer.observe(el);
+      });
+    });
+  </script>
+
+  <!-- FAQ Accordion Logic -->
+  <script>
+    function toggleAccordion(id) {
+      const content = document.getElementById(id);
+      const icon = document.getElementById('icon-' + id);
+      
+      // Close all other accordions (Optional behavior)
+      const allContents = document.querySelectorAll('[id^="faq"]');
+      const allIcons = document.querySelectorAll('[id^="icon-faq"]');
+      
+      let isOpening = !content.style.maxHeight || content.style.maxHeight === "0px";
+
+      // Reset all
+      allContents.forEach(c => {
+        if (c.id !== id) {
+          c.style.maxHeight = null;
+        }
+      });
+      allIcons.forEach(i => {
+        if (i.id !== 'icon-' + id) {
+          i.classList.remove('rotate-180');
+        }
+      });
+
+      // Toggle current
+      if (isOpening) {
+        content.style.maxHeight = content.scrollHeight + "px";
+        icon.classList.add('rotate-180');
+      } else {
+        content.style.maxHeight = null;
+        icon.classList.remove('rotate-180');
+      }
+    }
+  </script>
+
+
+  
+
+
+  <!-- Custom Tab Logic -->
+  <script>
+    function showTab(tabName) {
+      // İçerikleri gizle
+      document.getElementById('content-lgs').classList.add('hidden');
+      document.getElementById('content-yks').classList.add('hidden');
+      document.getElementById('content-arasinif').classList.add('hidden');
+      
+      document.getElementById('content-lgs').classList.remove('block');
+      document.getElementById('content-yks').classList.remove('block');
+      document.getElementById('content-arasinif').classList.remove('block');
+      
+      // Buton renklerini sıfırla
+      const btns = document.querySelectorAll('.tab-btn');
+      btns.forEach(btn => {
+        btn.classList.remove('bg-[#4f39f6]', 'text-white', 'shadow-md');
+        btn.classList.add('text-gray-700', 'hover:bg-gray-50');
+      });
+
+      // Seçileni göster
+      document.getElementById('content-' + tabName).classList.remove('hidden');
+      document.getElementById('content-' + tabName).classList.add('block');
+      
+      // Başlıkları ve Rozetleri güncelle
+      const baslik = document.getElementById('paket-baslik');
+      const rozet = document.getElementById('paket-rozet');
+      
+      if (tabName === 'lgs') {
+        baslik.textContent = 'LGS Özel Ders';
+        rozet.innerHTML = '👍 En Popüler';
+      } else if (tabName === 'yks') {
+        baslik.textContent = 'YKS Özel Ders';
+        rozet.innerHTML = '🔥 En Çok Seçilen';
+      } else if (tabName === 'arasinif') {
+        baslik.textContent = 'Ara Sınıf Özel Ders';
+        rozet.innerHTML = '⏳ Sınırlı Kontenjan';
+      }
+
+      // Butonu aktif yap
+      const activeBtn = document.getElementById('tab-btn-' + tabName);
+      activeBtn.classList.remove('text-gray-700', 'hover:bg-gray-50');
+      activeBtn.classList.add('bg-[#4f39f6]', 'text-white', 'shadow-md');
+    }
+
+    // İletişim Formu Mail Gönderme İşlemi (Türkçe Karakter Destekli)
+    function sendEmail(event) {
+      event.preventDefault(); // Formun sayfayı yenilemesini engelle
+
+      // Verileri al
+      const ad = document.getElementById('ad').value;
+      const soyad = document.getElementById('soyad').value;
+      const rol = document.getElementById('rol').value;
+      const telefon = document.getElementById('telefon').value;
+      const mesaj = document.getElementById('mesaj').value;
+
+      // Konu ve Gövdeyi oluştur
+      const konu = "omerhocam.com İletişim Formu: " + ad + " " + soyad;
+      const govde = "Ad: " + ad + "\n" +
+                    "Soyad: " + soyad + "\n" +
+                    "Kayıt Türü: " + rol + "\n" +
+                    "Telefon: " + telefon + "\n\n" +
+                    "Mesaj:\n" + mesaj;
+
+      // Mailto linkini güvenli bir şekilde oluştur (Türkçe karakterleri düzeltir)
+      const mailtoLink = "mailto:omerhocatv@gmail.com?subject=" + encodeURIComponent(konu) + "&body=" + encodeURIComponent(govde);
+
+      // Mail uygulamasını aç
+      window.location.href = mailtoLink;
+    }
+  </script>
+
+  <!-- İndirim Modalı (Pika) -->
+  <div id="pika-modal" class="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/70 hidden transition-opacity" onclick="this.classList.add('hidden')">
+    <div class="relative max-w-sm w-full animate-fade-up" onclick="event.stopPropagation()">
+      <button onclick="document.getElementById('pika-modal').classList.add('hidden')" class="absolute -top-10 right-0 text-white hover:text-gray-300 transition-colors focus:outline-none">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+      <a href="https://wa.me/905000000000" target="_blank" rel="noopener noreferrer" class="block hover:scale-[1.02] transition-transform">
+        <img src="a13.png" alt="İndirim Fırsatı" class="w-full rounded-2xl shadow-2xl">
+      </a>
+    </div>
+  </div>
+
+</body>
+</html>
