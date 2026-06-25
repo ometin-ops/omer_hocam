@@ -162,7 +162,7 @@
   <!-- ══════════════════════════════════════════
        NAVBAR
   ══════════════════════════════════════════ -->
-  <header id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-lg border-b border-white/30 shadow-sm">
+  <header id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100 shadow-sm">
     <div class="w-full max-w-7xl mx-auto px-4 sm:px-8 py-2 md:py-3 flex items-center justify-between gap-6">
 
       <!-- Logo ve Pika -->
@@ -376,12 +376,16 @@
   <!-- ══════════════════════════════════════════
        PLACEHOLDER SECTION ANCHORS (for nav links)
   ══════════════════════════════════════════ -->
-    <section id="ozel-ders" class="py-20 md:py-24 bg-[#f3f1fa] relative rounded-3xl mx-4 md:mx-8 mb-12">
+    <section id="ozel-ders" class="pt-20 md:pt-24 pb-8 md:pb-10 bg-[#f3f1fa] relative rounded-t-3xl mx-4 md:mx-8 mb-0">
     <div class="max-w-4xl mx-auto px-4 sm:px-8">
       
       <!-- Başlık -->
       <div class="text-center mb-10 animate-fade-up">
-        <h2 class="text-3xl md:text-4xl font-black text-[#1b004e] mb-4 tracking-tight">Hangi sınava hazırlanıyorsun?</h2>
+        <h2 class="text-3xl md:text-4xl font-black text-[#1b004e] mb-4 tracking-tight">Hangi sınava <span class="relative inline-block z-10">hazırlanıyorsun?
+          <svg class="absolute left-0 w-full h-3 -bottom-1 -z-10 pointer-events-none" viewBox="0 0 100 10" preserveAspectRatio="none">
+            <path class="draw-line" d="M2,5 Q50,8 98,3" stroke="#FBBF24" stroke-width="3" fill="transparent" stroke-linecap="round" />
+          </svg>
+        </span></h2>
         <p class="text-gray-600 text-base md:text-lg">Seçimini yaparak sana uygun programın detaylarını inceleyebilirsin.</p>
       </div>
 
@@ -395,10 +399,10 @@
       </div>
 
       <!-- Paket Kartı -->
-      <div class="bg-white rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.08)] p-6 md:p-10 relative animate-fade-up max-w-2xl mx-auto border-2 border-[#3468FA]">
+      <div class="bg-white rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.08)] p-6 md:p-10 relative animate-fade-up max-w-2xl mx-auto border-2 border-[#3666e4]">
         
         <!-- Sol Üst Dekoratif Süs -->
-        <img src="a8.png" alt="" aria-hidden="true" class="absolute -top-10 md:-top-14 -left-10 md:-left-14 z-10 w-28 h-28 md:w-36 md:h-36 object-contain pointer-events-none" />
+        <img src="b24.png" alt="" aria-hidden="true" class="absolute -top-16 md:-top-20 -left-6 md:-left-10 z-10 w-28 h-28 md:w-32 md:h-32 object-contain pointer-events-none" />
 
         <!-- Rozet -->
         <div class="absolute top-0 right-0 -mt-[2px] -mr-[2px] bg-[#3468FA] text-white px-5 py-2.5 rounded-tr-[2rem] rounded-bl-[1.5rem] text-sm font-bold flex items-center gap-1.5 shadow-md">
@@ -406,11 +410,11 @@
         </div>
 
         <!-- Kart Başlık & Fiyat -->
-        <div class="mt-6 mb-8 text-left">
+        <div class="mt-10 md:mt-6 mb-8 text-left relative z-20">
           <h3 id="paket-baslik" class="text-2xl md:text-3xl font-black text-gray-900 mb-2">LGS Özel Ders</h3>
           <div class="flex items-end gap-2">
-            <span class="text-4xl font-black text-[#3468FA]">₺790</span>
-            <span class="text-[#3468FA] font-medium pb-1">/ 1 Ders</span>
+            <span class="text-4xl font-black text-[#3666e4]">₺790</span>
+            <span class="text-[#3666e4] font-medium pb-1">/ 1 Ders</span>
           </div>
           <p class="text-gray-500 text-sm mt-3 font-medium">Hedeflerine ulaşmanda tam da ihtiyacın olan destek.</p>
         </div>
@@ -418,31 +422,31 @@
         <!-- LGS İçerik (Varsayılan Görünür) -->
         <ul id="content-lgs" class="space-y-4 mb-10 block">
           <li class="flex items-center gap-2">
-            <svg class="w-5 h-5 text-[#3468FA] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <svg class="w-5 h-5 text-[#3666e4] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
             <span class="text-gray-700 font-medium">Öğrenciye özel PDF'ler</span>
           </li>
           <li class="flex items-center gap-2">
-            <svg class="w-5 h-5 text-[#3468FA] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <svg class="w-5 h-5 text-[#3666e4] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
             <span class="text-gray-700 font-medium">Kitap ve doküman desteği</span>
           </li>
           <li class="flex items-center gap-2">
-            <svg class="w-5 h-5 text-[#3468FA] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <svg class="w-5 h-5 text-[#3666e4] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
             <span class="text-gray-700 font-medium">Düzenli deneme ve takibi</span>
           </li>
           <li class="flex items-center gap-2">
-            <svg class="w-5 h-5 text-[#3468FA] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <svg class="w-5 h-5 text-[#3666e4] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
             <span class="text-gray-700 font-medium">Online kütüphane ile beraber ders çalışma</span>
           </li>
           <li class="flex items-center gap-2">
-            <svg class="w-5 h-5 text-[#3468FA] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <svg class="w-5 h-5 text-[#3666e4] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
             <span class="text-gray-700 font-medium">Öğrenciye Özel Eksik Konu Analizi</span>
           </li>
           <li class="flex items-center gap-2">
-            <svg class="w-5 h-5 text-[#3468FA] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <svg class="w-5 h-5 text-[#3666e4] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
             <span class="text-gray-700 font-medium">7/24 soru sorabilme</span>
           </li>
           <li class="flex items-center gap-2">
-            <svg class="w-5 h-5 text-[#3468FA] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <svg class="w-5 h-5 text-[#3666e4] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
             <span class="text-gray-700 font-medium">Ücretsiz tanışma dersi</span>
           </li>
         </ul>
@@ -450,31 +454,31 @@
         <!-- YKS İçerik (Gizli) -->
         <ul id="content-yks" class="space-y-4 mb-10 hidden">
           <li class="flex items-center gap-2">
-            <svg class="w-5 h-5 text-[#3468FA] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <svg class="w-5 h-5 text-[#3666e4] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
             <span class="text-gray-700 font-medium">Öğrenciye özel PDF'ler</span>
           </li>
           <li class="flex items-center gap-2">
-            <svg class="w-5 h-5 text-[#3468FA] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <svg class="w-5 h-5 text-[#3666e4] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
             <span class="text-gray-700 font-medium">Kitap ve doküman desteği</span>
           </li>
           <li class="flex items-center gap-2">
-            <svg class="w-5 h-5 text-[#3468FA] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <svg class="w-5 h-5 text-[#3666e4] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
             <span class="text-gray-700 font-medium">Düzenli deneme ve takibi</span>
           </li>
           <li class="flex items-center gap-2">
-            <svg class="w-5 h-5 text-[#3468FA] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <svg class="w-5 h-5 text-[#3666e4] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
             <span class="text-gray-700 font-medium">Online kütüphane ile beraber ders çalışma</span>
           </li>
           <li class="flex items-center gap-2">
-            <svg class="w-5 h-5 text-[#3468FA] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <svg class="w-5 h-5 text-[#3666e4] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
             <span class="text-gray-700 font-medium">Öğrenciye Özel Eksik Konu Analizi</span>
           </li>
           <li class="flex items-center gap-2">
-            <svg class="w-5 h-5 text-[#3468FA] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <svg class="w-5 h-5 text-[#3666e4] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
             <span class="text-gray-700 font-medium">7/24 soru sorabilme</span>
           </li>
           <li class="flex items-center gap-2">
-            <svg class="w-5 h-5 text-[#3468FA] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <svg class="w-5 h-5 text-[#3666e4] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
             <span class="text-gray-700 font-medium">Ücretsiz tanışma dersi</span>
           </li>
         </ul>
@@ -482,43 +486,43 @@
         <!-- Ara Sınıf İçerik (Gizli) -->
         <ul id="content-arasinif" class="space-y-4 mb-10 hidden">
           <li class="flex items-center gap-2">
-            <svg class="w-5 h-5 text-[#3468FA] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <svg class="w-5 h-5 text-[#3666e4] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
             <span class="text-gray-700 font-medium">Maarif modele uygun PDF'ler</span>
           </li>
           <li class="flex items-center gap-2">
-            <svg class="w-5 h-5 text-[#3468FA] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <svg class="w-5 h-5 text-[#3666e4] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
             <span class="text-gray-700 font-medium">Yazılılara özel kamplar</span>
           </li>
           <li class="flex items-center gap-2">
-            <svg class="w-5 h-5 text-[#3468FA] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <svg class="w-5 h-5 text-[#3666e4] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
             <span class="text-gray-700 font-medium">Kitap ve doküman desteği</span>
           </li>
           <li class="flex items-center gap-2">
-            <svg class="w-5 h-5 text-[#3468FA] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <svg class="w-5 h-5 text-[#3666e4] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
             <span class="text-gray-700 font-medium">Düzenli deneme ve takibi</span>
           </li>
           <li class="flex items-center gap-2">
-            <svg class="w-5 h-5 text-[#3468FA] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <svg class="w-5 h-5 text-[#3666e4] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
             <span class="text-gray-700 font-medium">7/24 soru sorabilme</span>
           </li>
           <li class="flex items-center gap-2">
-            <svg class="w-5 h-5 text-[#3468FA] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <svg class="w-5 h-5 text-[#3666e4] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
             <span class="text-gray-700 font-medium">Ücretsiz tanışma dersi</span>
           </li>
         </ul>
 
-        <!-- Buton -->
-        <button class="w-full bg-[#3468FA] text-white py-4 rounded-[1rem] font-bold text-lg hover:opacity-90 transition-opacity shadow-lg shadow-[#3468FA]/20 active:scale-[0.98]">
-          Ücretsiz Derse Başla
-        </button>
-
         <!-- Görsel Alanı (Placeholder) -->
-        <div class="mt-6 w-full h-48 sm:h-56 bg-gray-50 rounded-xl overflow-hidden relative border border-gray-100 shadow-inner">
+        <div class="mb-6 w-full h-48 sm:h-56 bg-gray-50 rounded-xl overflow-hidden relative border border-gray-100 shadow-inner">
           <img src="ozel-ders-gorseli.jpg" alt="Özel Ders" class="w-full h-full object-cover">
           <div class="absolute inset-0 flex items-center justify-center text-gray-400 text-sm font-medium border-2 border-dashed border-gray-200 rounded-xl m-1">
             [ Özel Ders Görseli Buraya Gelecek ]
           </div>
         </div>
+
+        <!-- Buton -->
+        <button class="w-full bg-[#3666e4] text-white py-4 rounded-[1rem] font-bold text-lg hover:opacity-90 transition-opacity shadow-lg shadow-[#3468FA]/20 active:scale-[0.98]">
+          Ücretsiz Derse Başla
+        </button>
 
       </div>
     </div>
@@ -526,20 +530,24 @@
   <!-- ══════════════════════════════════════════
        KOÇLUK SECTION
   ══════════════════════════════════════════ -->
-  <section id="kocluk" class="py-20 md:py-24 bg-[#f3f1fa] relative rounded-3xl mx-4 md:mx-8 mb-12">
+  <section id="kocluk" class="pt-8 md:pt-10 pb-20 md:pb-24 bg-[#f3f1fa] relative rounded-b-3xl mx-4 md:mx-8 mb-12">
     <div class="max-w-4xl mx-auto px-4 sm:px-8">
       
       <!-- Başlık -->
       <div class="text-center mb-10 animate-fade-up">
-        <h2 class="text-3xl md:text-4xl font-black text-[#1b004e] mb-4 tracking-tight">Sana Özel Birebir Koçluk Programı</h2>
+        <h2 class="text-3xl md:text-4xl font-black text-[#1b004e] mb-4 tracking-tight">Sana Özel Birebir <span class="relative inline-block z-10">Koçluk Programı
+          <svg class="absolute left-0 w-full h-3 -bottom-1 -z-10 pointer-events-none" viewBox="0 0 100 10" preserveAspectRatio="none">
+            <path class="draw-line" d="M2,5 Q50,8 98,3" stroke="#FBBF24" stroke-width="3" fill="transparent" stroke-linecap="round" />
+          </svg>
+        </span></h2>
         <p class="text-gray-600 text-base md:text-lg">Hedeflerine ulaşman için sana özel hazırlanan, adım adım seni başarıya götürecek birebir program.</p>
       </div>
 
       <!-- Koçluk Kartı -->
-      <div class="bg-white rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.08)] p-6 md:p-10 relative animate-fade-up max-w-2xl mx-auto border-2 border-[#3468FA]">
+      <div class="bg-white rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.08)] p-6 md:p-10 relative animate-fade-up max-w-2xl mx-auto border-2 border-[#3666e4]">
         
         <!-- Sol Üst Dekoratif Süs -->
-        <img src="a8.png" alt="" aria-hidden="true" class="absolute -top-10 md:-top-14 -left-10 md:-left-14 z-10 w-28 h-28 md:w-36 md:h-36 object-contain pointer-events-none" />
+        <img src="b24.png" alt="" aria-hidden="true" class="absolute -top-16 md:-top-20 -left-6 md:-left-10 z-10 w-28 h-28 md:w-32 md:h-32 object-contain pointer-events-none" />
 
         <!-- Rozet -->
         <div class="absolute top-0 right-0 -mt-[2px] -mr-[2px] bg-[#3468FA] text-white px-5 py-2.5 rounded-tr-[2rem] rounded-bl-[1.5rem] text-sm font-bold flex items-center gap-1.5 shadow-md">
@@ -547,11 +555,11 @@
         </div>
 
         <!-- Kart Başlık & Fiyat -->
-        <div class="mt-6 mb-8 text-left">
+        <div class="mt-10 md:mt-6 mb-8 text-left relative z-20">
           <h3 class="text-2xl md:text-3xl font-black text-gray-900 mb-2">Öğrenci Koçluğu</h3>
           <div class="flex items-end gap-2">
-            <span class="text-4xl font-black text-[#3468FA]">₺2.700</span>
-            <span class="text-[#3468FA] font-medium pb-1">/ 4 Hafta</span>
+            <span class="text-4xl font-black text-[#3666e4]">₺2.700</span>
+            <span class="text-[#3666e4] font-medium pb-1">/ 4 Hafta</span>
           </div>
           <p class="text-gray-500 text-sm mt-3 font-medium">Hedeflerine ulaşmanda tam da ihtiyacın olan profesyonel destek.</p>
         </div>
@@ -559,40 +567,40 @@
         <!-- Liste -->
         <ul class="space-y-4 mb-10">
           <li class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-[#3468FA] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <svg class="w-5 h-5 text-[#3666e4] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
             <span class="text-gray-700 font-medium">Haftada 2 kez görüşme</span>
           </li>
           <li class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-[#3468FA] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <svg class="w-5 h-5 text-[#3666e4] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
             <span class="text-gray-700 font-medium">Online kütüphanede beraber ders çalışma</span>
           </li>
           <li class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-[#3468FA] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <svg class="w-5 h-5 text-[#3666e4] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
             <span class="text-gray-700 font-medium">Planlama defteri ve doküman hediyesi</span>
           </li>
           <li class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-[#3468FA] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <svg class="w-5 h-5 text-[#3666e4] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
             <span class="text-gray-700 font-medium">Haftalık, aylık raporlar</span>
           </li>
           <li class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-[#3468FA] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <svg class="w-5 h-5 text-[#3666e4] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
             <span class="text-gray-700 font-medium">7/24 mesajlaşma</span>
           </li>
           <li class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-[#3468FA] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <svg class="w-5 h-5 text-[#3666e4] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
             <span class="text-gray-700 font-medium">Ücretsiz tanışma ve görüşme</span>
           </li>
         </ul>
 
-        <!-- Buton -->
-        <button class="w-full bg-[#3468FA] text-white py-4 rounded-[1rem] font-bold text-lg hover:opacity-90 transition-opacity shadow-lg shadow-[#3468FA]/20 active:scale-[0.98]">
-          Ücretsiz Görüşmeye Başla
-        </button>
-
         <!-- Resim Alanı (Placeholder) -->
-        <div class="mt-8 aspect-video rounded-xl overflow-hidden bg-gray-100 flex items-center justify-center border border-gray-200">
+        <div class="mb-8 aspect-video rounded-xl overflow-hidden bg-gray-100 flex items-center justify-center border border-gray-200">
           <img src="kocluk-gorsel.jpg" alt="Koçluk Görseli" class="w-full h-full object-cover text-gray-400 font-medium flex items-center justify-center text-center p-4">
         </div>
+
+        <!-- Buton -->
+        <button class="w-full bg-[#3666e4] text-white py-4 rounded-[1rem] font-bold text-lg hover:opacity-90 transition-opacity shadow-lg shadow-[#3468FA]/20 active:scale-[0.98]">
+          Ücretsiz Görüşmeye Başla
+        </button>
 
         <!-- Değerlendirme (Sosyal Kanıt) -->
         <div class="mt-5 flex items-center justify-center gap-2">
