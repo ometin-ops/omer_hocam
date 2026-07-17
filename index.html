@@ -157,7 +157,7 @@
   </style>
 </head>
 
-<body class="antialiased w-full max-w-[100vw] overflow-x-hidden">
+<body class="antialiased w-full max-w-[100vw] overflow-x-hidden bg-slate-50">
 
   <!-- ══════════════════════════════════════════
        NAVBAR
@@ -194,10 +194,10 @@
        HERO SECTION
   ══════════════════════════════════════════ -->
   <main>
-    <section id="hero" class="relative max-w-7xl mx-auto px-4 sm:px-8 pt-2 pb-5 md:pt-4 md:pb-7">
+    <section id="hero" class="relative w-full pt-0 pb-5 md:pt-0 md:pb-7">
 
       <!-- ░░ HERO WRAPPER — relative, süsler bu katmanda taşar ░░ -->
-      <div class="relative">
+      <div class="relative w-full">
 
         <!-- ─────────────────────────────────────────────────────────
              3D Dekoratif Süsler — wrapper'a absolute, overflow-hidden'dan bağımsız
@@ -207,21 +207,21 @@
         <img src="b21.png"
              alt="Rakun Maskot"
              aria-hidden="true"
-             class="absolute mt-8 object-contain w-40 md:w-56 lg:w-64 max-w-full top-40 md:top-[35%] lg:top-[40%] -right-2 md:right-auto md:left-[28%] lg:left-[32%] z-20 pointer-events-none"
+             class="absolute mt-8 object-contain w-40 md:w-56 lg:w-64 max-w-full top-40 md:top-[35%] lg:top-[40%] -right-2 md:right-10 lg:right-32 z-20 pointer-events-none"
              style="filter: drop-shadow(0 12px 28px rgba(0,0,0,0.22));" />
 
         <!-- Sağ Alt: a11.png (spiral) -->
         <img src="a11.png"
              alt=""
              aria-hidden="true"
-             class="absolute -bottom-10 -right-20 md:-right-28 w-40 md:w-56 max-w-full z-20 pointer-events-none"
+             class="absolute -bottom-10 -right-4 md:-right-10 w-40 md:w-56 max-w-full z-20 pointer-events-none"
              style="filter: drop-shadow(0 12px 28px rgba(0,0,0,0.25));" />
 
         <!-- ░░ HERO CARD — overflow-hidden sadece içeriği keser, süslere dokunmaz ░░ -->
-        <div class="relative overflow-hidden rounded-[2rem] md:rounded-[2.5rem]
+        <div class="relative overflow-hidden rounded-t-[32px]
                     bg-gradient-to-br from-[#0029b8] to-[#0047ff]
                     h-auto md:h-[600px]
-                    flex flex-col md:flex-row">
+                    flex flex-col md:flex-row mx-3 mt-3">
 
           <!-- Sol içerik: mobilde p-6, masaüstü px-12 — mobilde üste -->
           <div class="relative z-10 flex flex-col justify-center
@@ -369,6 +369,245 @@
 
     </section><!-- /hero -->
   </main>
+
+
+  <!-- ══════════════════════════════════════════
+       ÖNE ÇIKAN ÖZELLİKLER / SHOWCASE SLIDER
+  ══════════════════════════════════════════ -->
+  <section id="showcase" class="py-16 md:py-24 bg-white overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Section Üst Başlık -->
+      <div class="text-center mb-12 md:mb-16">
+        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 text-[#0047ff] text-sm font-semibold mb-4">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          Öne Çıkan Özellikler
+        </span>
+        <h2 class="text-3xl md:text-4xl font-black text-zinc-900 tracking-tight">Seni Başarıya Taşıyacak <span class="text-[#0047ff]">Araçlar</span></h2>
+      </div>
+
+      <!-- 2 Sütunlu Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
+
+        <!-- ═══ SOL SÜTUN: Stacked Cards Mockup ═══ -->
+        <div class="order-1 md:order-1">
+          <div id="stacked-cards-container" class="relative w-full" style="aspect-ratio: 4/3; perspective: 1200px;">
+            <!-- Kartlar JS tarafından dinamik olarak eklenecek -->
+          </div>
+        </div>
+
+        <!-- ═══ SAĞ SÜTUN: İçerik ve Kontroller ═══ -->
+        <div class="order-2 md:order-2 flex flex-col justify-center">
+          <!-- Slide Sayacı -->
+          <span id="showcase-counter" class="text-sm font-bold text-[#0047ff] tracking-widest mb-3"></span>
+
+          <!-- Başlık -->
+          <h3 id="showcase-title" class="text-3xl md:text-4xl font-bold text-zinc-900 leading-tight mb-2 transition-all duration-300"></h3>
+
+          <!-- Alt Başlık -->
+          <p id="showcase-subtitle" class="text-lg text-gray-400 font-medium mb-4 transition-all duration-300"></p>
+
+          <!-- Açıklama -->
+          <p id="showcase-desc" class="text-gray-600 leading-relaxed mb-8 transition-all duration-300"></p>
+
+          <!-- Pagination Dots -->
+          <div id="showcase-dots" class="flex items-center gap-2 mb-8">
+            <!-- Noktalar JS tarafından dinamik olarak eklenecek -->
+          </div>
+
+          <!-- Buton Grubu -->
+          <div class="flex flex-wrap gap-4">
+            <button onclick="prevSlide()" class="px-6 py-3 rounded-xl border-2 border-gray-200 text-zinc-700 font-semibold text-sm hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+              Önceki
+            </button>
+            <button onclick="nextSlide()" class="px-6 py-3 rounded-xl bg-[#0047ff] text-white font-semibold text-sm hover:bg-[#0039cc] transition-all duration-200 shadow-lg shadow-[#0047ff]/30 hover:shadow-xl hover:shadow-[#0047ff]/40 flex items-center gap-2">
+              Sonraki
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+
+      </div><!-- /grid -->
+    </div><!-- /container -->
+  </section>
+
+  <!-- Showcase Stacked Cards Slider Logic -->
+  <script>
+    (function() {
+      const showcaseData = [
+        {
+          image: "post1.png", 
+          title: "Özel Olarak Hazırlanmış PDF'ler",
+          subtitle: "Yeni Nesil Sorular ve Çözümler",
+          description: "Kendi hazırladığım, MEB müfredatına tam uyumlu ve analitik düşünme becerisini geliştiren özel matematik fasikülleriyle rakiplerinin bir adım önüne geç."
+        },
+        {
+          image: "post2.png", 
+          title: "Deneme Analizi ve Takibi",
+          subtitle: "Yapay Zeka Destekli Gelişim",
+          description: "Girdiğin deneme sınavlarını detaylıca analiz ediyor, eksik kazanımlarını nokta atışı tespit ederek sana en uygun çalışma yol haritasını çıkarıyoruz."
+        },
+        {
+          image: "post3.png", 
+          title: "Düzenli Öğrenci Takibi",
+          subtitle: "Haftalık Program ve Birebir Koçluk",
+          description: "Öğrencilerimiz için haftalık ve günlük çalışma programları hazırlıyor, hedeflerine sapmadan ilerlemeleri için süreçlerini yakından takip ediyoruz."
+        },
+        {
+          image: "post4.png", 
+          title: "Kitap ve Doküman Desteği",
+          subtitle: "Planlama Defterim ile Başarı",
+          description: "Süreci en iyi şekilde yönetmek için özel olarak hazırladığımız 'Planlama Defterim' ve özenle seçilmiş seviyene uygun kaynaklarla daima yanındayız."
+        },
+        {
+          image: "post5.png", 
+          title: "Konu ve Genel Denemeleri",
+          subtitle: "Gerçek Sınav Provası",
+          description: "Belirli periyotlarla uyguladığımız branş ve genel denemeler sayesinde gerçek sınav stresini yenmeyi ve zaman yönetimini kusursuzlaştırmayı öğreniyoruz."
+        },
+        {
+          image: "post6.png", 
+          title: "Online Kütüphanede Beraber Çalışma",
+          subtitle: "Maksimum Odaklanma ve Motivasyon",
+          description: "Belirlenen saatlerde online kütüphane ortamında toplanarak hep birlikte ders çalışıyor, çalışma disiplinimizi ve motivasyonumuzu en üst seviyeye çıkarıyoruz."
+        },
+        {
+          image: "post7.png", 
+          title: "7/24 Soru Sorabilme İmkanı",
+          subtitle: "Anında Çözüm Desteği",
+          description: "Ders çalışırken takıldığın veya çözemediğin soruları günün her saati bana iletebilir, detaylı çözüm yollarına hızlıca ulaşarak zaman kaybetmekten kurtulabilirsin."
+        }
+      ];
+
+      const cardsContainer = document.getElementById('stacked-cards-container');
+      const dotsContainer = document.getElementById('showcase-dots');
+
+      // Dinamik olarak kartları ve noktaları oluştur
+      showcaseData.forEach((item, i) => {
+        const card = document.createElement('div');
+        card.className = 'showcase-card absolute inset-0 transition-all duration-500 ease-in-out';
+        card.setAttribute('data-index', i);
+        card.innerHTML = `<img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover rounded-2xl shadow-2xl" />`;
+        cardsContainer.appendChild(card);
+        
+        const dot = document.createElement('button');
+        dot.className = 'showcase-dot w-2 h-2 rounded-full bg-gray-300 transition-all duration-300';
+        dot.onclick = () => window.goToSlide(i);
+        dotsContainer.appendChild(dot);
+      });
+
+      let currentSlide = 0;
+      const totalSlides = showcaseData.length;
+      const cards = document.querySelectorAll('.showcase-card');
+      const dots = document.querySelectorAll('.showcase-dot');
+
+      function getCardPosition(cardIndex, activeIndex) {
+        const diff = cardIndex - activeIndex;
+        // Normalize for wrap-around
+        let normalizedDiff = diff;
+        if (diff > totalSlides / 2) normalizedDiff = diff - totalSlides;
+        if (diff < -totalSlides / 2) normalizedDiff = diff + totalSlides;
+
+        if (normalizedDiff === 0) {
+          // Active (front)
+          return { transform: 'translateX(0) rotate(0deg) scale(1)', zIndex: 30, opacity: 1, shadow: '0 25px 50px -12px rgba(0,0,0,0.5)' };
+        } else if (normalizedDiff === -1) {
+          // Previous (back-left)
+          return { transform: 'translateX(-30px) rotate(-6deg) scale(0.92)', zIndex: 10, opacity: 0.6, shadow: '0 20px 40px -12px rgba(0,0,0,0.35)' };
+        } else if (normalizedDiff === 1) {
+          // Next (back-right)
+          return { transform: 'translateX(30px) rotate(6deg) scale(0.92)', zIndex: 10, opacity: 0.6, shadow: '0 20px 40px -12px rgba(0,0,0,0.35)' };
+        } else {
+          // Hidden
+          return { transform: 'translateX(0) rotate(0deg) scale(0.8)', zIndex: 0, opacity: 0, shadow: 'none' };
+        }
+      }
+
+      function updateShowcase() {
+        const data = showcaseData[currentSlide];
+
+        // Update stacked cards positions
+        cards.forEach((card, i) => {
+          const pos = getCardPosition(i, currentSlide);
+          card.style.transform = pos.transform;
+          card.style.zIndex = pos.zIndex;
+          card.style.opacity = pos.opacity;
+          card.style.boxShadow = pos.shadow;
+        });
+
+        // Update text
+        document.getElementById('showcase-title').textContent = data.title;
+        document.getElementById('showcase-subtitle').textContent = data.subtitle;
+        document.getElementById('showcase-desc').textContent = data.description;
+        document.getElementById('showcase-counter').textContent = `0${currentSlide + 1} / 0${totalSlides}`;
+
+        // Update dots
+        dots.forEach((dot, i) => {
+          if (i === currentSlide) {
+            dot.classList.add('w-8', 'bg-[#0047ff]');
+            dot.classList.remove('w-2', 'bg-gray-300');
+          } else {
+            dot.classList.remove('w-8', 'bg-[#0047ff]');
+            dot.classList.add('w-2', 'bg-gray-300');
+          }
+        });
+      }
+
+      window.goToSlide = function(index) {
+        currentSlide = index;
+        updateShowcase();
+      };
+      window.nextSlide = function() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        updateShowcase();
+      };
+      window.prevSlide = function() {
+        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        updateShowcase();
+      };
+
+      // Swipe (Touch) Logic for Mobile
+      const container = document.getElementById('stacked-cards-container');
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let touchEndX = 0;
+      let touchEndY = 0;
+
+      container.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+      }, { passive: true });
+
+      container.addEventListener('touchend', function(e) {
+        touchEndX = e.changedTouches[0].screenX;
+        touchEndY = e.changedTouches[0].screenY;
+        handleSwipe();
+      }, { passive: true });
+
+      function handleSwipe() {
+        const deltaX = touchStartX - touchEndX;
+        const deltaY = touchStartY - touchEndY;
+        const threshold = 50; // Minimum swipe distance in px
+
+        // Dikey kaydırma (scroll) yatay kaydırmadan büyükse, işlemi iptal et (kullanıcı sayfayı kaydırıyor demektir)
+        if (Math.abs(deltaY) > Math.abs(deltaX)) {
+          return;
+        }
+
+        if (deltaX > threshold) {
+          // Sola kaydırıldı (Next)
+          window.nextSlide();
+        } else if (deltaX < -threshold) {
+          // Sağa kaydırıldı (Prev)
+          window.prevSlide();
+        }
+      }
+
+      // Initialize card positions
+      updateShowcase();
+    })();
+  </script>
 
 
   <!-- ══════════════════════════════════════════
@@ -1045,56 +1284,92 @@
   <!-- ══════════════════════════════════════════
        MOBİL ALT NAVİGASYON (BOTTOM NAV)
   ══════════════════════════════════════════ -->
-  <nav id="bottom-nav" class="md:hidden fixed bottom-0 left-0 w-full z-[100] bg-white rounded-t-3xl shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
-    <div class="flex justify-between items-end px-4 pb-2 pt-4">
-      
-      <!-- Ana Sayfa -->
-      <a href="#hero" class="nav-item flex flex-col items-center gap-1 text-[#150338] w-[20%]" data-target="hero">
-        <div class="icon-bg p-3 rounded-full transition-all duration-300 bg-gradient-to-r from-[#0029b8] to-[#0047ff] text-white -translate-y-6 border-4 border-white shadow-lg shadow-[#0047ff]/40">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
-        </div>
-        <span class="text-[10px] font-bold transition-colors duration-300 -mt-5">Ana Sayfa</span>
-      </a>
+  <nav id="bottom-nav" class="md:hidden fixed bottom-0 w-full bg-white flex justify-around items-end pt-1.5 pb-2 pb-safe z-[50] rounded-t-3xl shadow-[0_-4px_15px_rgba(0,0,0,0.05)] overflow-visible">
 
-      <!-- Özel Ders -->
-      <a href="#ozel-ders" class="nav-item flex flex-col items-center gap-1 text-gray-400 w-[20%]" data-target="ozel-ders">
-        <div class="icon-bg p-2 rounded-full transition-all duration-300">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-        </div>
-        <span class="text-[10px] font-medium transition-colors duration-300">Özel Ders</span>
-      </a>
+    <!-- Ana Sayfa (Aktif) -->
+    <a href="#hero" class="nav-item relative flex flex-col items-center gap-0.5 w-[20%] focus:outline-none" data-target="hero">
+      <div class="icon-bg transition-all duration-400 ease-in-out w-12 h-12 rounded-full flex items-center justify-center bg-[#0047ff] text-white -translate-y-5 border-[5px] border-white shadow-md">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+      </div>
+      <span class="nav-label text-[10px] font-semibold text-zinc-900 transition-colors duration-300">Ana Sayfa</span>
+    </a>
 
-      <!-- Koçluk -->
-      <a href="#kocluk" class="nav-item flex flex-col items-center gap-1 text-gray-400 w-[20%]" data-target="kocluk">
-        <div class="icon-bg p-2 rounded-full transition-all duration-300">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
-        </div>
-        <span class="text-[10px] font-medium transition-colors duration-300">Koçluk</span>
-      </a>
+    <!-- Özel Ders -->
+    <a href="#ozel-ders" class="nav-item relative flex flex-col items-center gap-0.5 w-[20%] focus:outline-none" data-target="ozel-ders">
+      <div class="icon-bg transition-all duration-400 ease-in-out w-12 h-12 rounded-full flex items-center justify-center bg-transparent text-gray-500 translate-y-0">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+      </div>
+      <span class="nav-label text-[10px] text-gray-500 transition-colors duration-300">Özel Ders</span>
+    </a>
 
-      <!-- Kampüs -->
-      <a href="#kampus" class="nav-item flex flex-col items-center gap-1 text-gray-400 w-[20%]" data-target="kampus">
-        <div class="icon-bg p-2 rounded-full transition-all duration-300">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
-        </div>
-        <span class="text-[10px] font-medium transition-colors duration-300">Kampüs</span>
-      </a>
+    <!-- Koçluk -->
+    <a href="#kocluk" class="nav-item relative flex flex-col items-center gap-0.5 w-[20%] focus:outline-none" data-target="kocluk">
+      <div class="icon-bg transition-all duration-400 ease-in-out w-12 h-12 rounded-full flex items-center justify-center bg-transparent text-gray-500 translate-y-0">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+      </div>
+      <span class="nav-label text-[10px] text-gray-500 transition-colors duration-300">Koçluk</span>
+    </a>
 
-      <!-- İletişim -->
-      <button onclick="document.getElementById('contact-drawer').classList.remove('translate-x-full'); document.getElementById('drawer-overlay').classList.remove('hidden');" class="nav-item flex flex-col items-center gap-1 text-gray-400 w-[20%] focus:outline-none">
-        <div class="icon-bg p-2 rounded-full transition-all duration-300">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
-        </div>
-        <span class="text-[10px] font-medium transition-colors duration-300">İletişim</span>
-      </button>
+    <!-- Kampüs -->
+    <a href="#kampus" class="nav-item relative flex flex-col items-center gap-0.5 w-[20%] focus:outline-none" data-target="kampus">
+      <div class="icon-bg transition-all duration-400 ease-in-out w-12 h-12 rounded-full flex items-center justify-center bg-transparent text-gray-500 translate-y-0">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+      </div>
+      <span class="nav-label text-[10px] text-gray-500 transition-colors duration-300">Kampüs</span>
+    </a>
 
-    </div>
+    <!-- İletişim -->
+    <button onclick="document.getElementById('contact-drawer').classList.remove('translate-x-full'); document.getElementById('drawer-overlay').classList.remove('hidden');" class="nav-item relative flex flex-col items-center gap-0.5 w-[20%] focus:outline-none" data-target="iletisim">
+      <div class="icon-bg transition-all duration-400 ease-in-out w-12 h-12 rounded-full flex items-center justify-center bg-transparent text-gray-500 translate-y-0">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+      </div>
+      <span class="nav-label text-[10px] text-gray-500 transition-colors duration-300">İletişim</span>
+    </button>
+
   </nav>
 
-  <!-- Alt Navigasyon Scroll Observer Logic -->
+  <!-- Alt Navigasyon Scroll Observer & Animation Logic -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       const navItems = document.querySelectorAll('.nav-item');
+      
+      function setActiveTab(activeLink) {
+        if (!activeLink) return;
+        // Reset all to passive
+        navItems.forEach(item => {
+          const iconBg = item.querySelector('.icon-bg');
+          const label = item.querySelector('.nav-label');
+          if (iconBg) {
+            iconBg.classList.remove('bg-[#0047ff]', 'text-white', '-translate-y-5', 'border-[5px]', 'border-white', 'shadow-md');
+            iconBg.classList.add('bg-transparent', 'text-gray-500', 'translate-y-0');
+          }
+          if (label) {
+            label.classList.remove('font-semibold', 'text-zinc-900');
+            label.classList.add('text-gray-500');
+          }
+        });
+
+        // Set active
+        const activeIconBg = activeLink.querySelector('.icon-bg');
+        const activeLabel = activeLink.querySelector('.nav-label');
+        if (activeIconBg) {
+          activeIconBg.classList.remove('bg-transparent', 'text-gray-500', 'translate-y-0');
+          activeIconBg.classList.add('bg-[#0047ff]', 'text-white', '-translate-y-5', 'border-[5px]', 'border-white', 'shadow-md');
+        }
+        if (activeLabel) {
+          activeLabel.classList.remove('text-gray-500');
+          activeLabel.classList.add('font-semibold', 'text-zinc-900');
+        }
+      }
+
+      // Handle direct clicks
+      navItems.forEach(link => {
+        link.addEventListener('click', function() {
+          setActiveTab(this);
+        });
+      });
+
+      // Scroll observer
       const observerOptions = {
         root: null,
         rootMargin: '-30% 0px -70% 0px',
@@ -1105,28 +1380,9 @@
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             const id = entry.target.getAttribute('id');
-            
-            navItems.forEach(item => {
-              item.classList.remove('text-[#150338]');
-              item.classList.add('text-gray-400');
-              const span = item.querySelector('span');
-              span.classList.remove('font-bold', '-mt-5');
-              span.classList.add('font-medium');
-              const iconBg = item.querySelector('.icon-bg');
-              iconBg.classList.remove('bg-gradient-to-r', 'from-[#0029b8]', 'to-[#0047ff]', 'text-white', '-translate-y-6', 'border-4', 'border-white', 'shadow-lg', 'shadow-[#0047ff]/40', 'p-3');
-              iconBg.classList.add('p-2');
-            });
-            
             const activeLink = document.querySelector(`.nav-item[data-target="${id}"]`);
             if (activeLink) {
-              activeLink.classList.remove('text-gray-400');
-              activeLink.classList.add('text-[#150338]');
-              const span = activeLink.querySelector('span');
-              span.classList.remove('font-medium');
-              span.classList.add('font-bold', '-mt-5');
-              const iconBg = activeLink.querySelector('.icon-bg');
-              iconBg.classList.remove('p-2');
-              iconBg.classList.add('bg-gradient-to-r', 'from-[#0029b8]', 'to-[#0047ff]', 'text-white', '-translate-y-6', 'border-4', 'border-white', 'shadow-lg', 'shadow-[#0047ff]/40', 'p-3');
+              setActiveTab(activeLink);
             }
           }
         });
