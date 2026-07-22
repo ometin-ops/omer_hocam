@@ -235,7 +235,7 @@
   <!-- ══════════════════════════════════════════
        ÖNE ÇIKAN ÖZELLİKLER / SHOWCASE SLIDER
   ══════════════════════════════════════════ -->
-  <section id="showcase" class="py-16 md:py-24 bg-white overflow-hidden">
+  <section id="showcase" class="py-16 md:py-24 bg-white overflow-hidden opacity-0 translate-y-10 transition-all duration-1000 ease-out reveal-section">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
       <!-- Section Üst Başlık -->
@@ -244,16 +244,22 @@
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
           Öne Çıkan Özellikler
         </span>
-        <h2 class="text-3xl md:text-4xl font-black text-zinc-900 tracking-tight">Seni Başarıya Taşıyacak <span class="text-[#0047ff]">Araçlar</span></h2>
+        <h2 class="text-3xl md:text-4xl font-black text-zinc-900 tracking-tight">Sistemimizde <span class="text-[#0047ff]">Neler Var?</span></h2>
       </div>
 
       <!-- 2 Sütunlu Grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
 
         <!-- ═══ SOL SÜTUN: Stacked Cards Mockup ═══ -->
-        <div class="order-1 md:order-1">
+        <div class="order-1 md:order-1 relative">
           <div id="stacked-cards-container" class="relative w-full aspect-video" style="perspective: 1200px;">
             <!-- Kartlar JS tarafından dinamik olarak eklenecek -->
+          </div>
+
+          <!-- Mobil Kaydırma (Swipe) İpucu -->
+          <div class="absolute bottom-4 right-4 z-30 md:hidden flex items-center gap-2 bg-black/60 backdrop-blur-sm text-white rounded-full px-3 py-1.5 shadow-lg animate-pulse pointer-events-none">
+            <span class="text-[11px] font-semibold tracking-wide uppercase">Yana Kaydırın</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 3l4 4-4 4M8 21l-4-4 4-4M20 7H4M4 17h16"></path></svg>
           </div>
         </div>
 
@@ -474,7 +480,7 @@
   <!-- ══════════════════════════════════════════
        PLACEHOLDER SECTION ANCHORS (for nav links)
   ══════════════════════════════════════════ -->
-    <section id="ozel-ders" class="pt-20 md:pt-24 pb-8 md:pb-10 bg-[#f3f1fa] relative rounded-t-3xl mx-2 md:mx-4 mb-0">
+    <section id="ozel-ders" class="pt-20 md:pt-24 pb-8 md:pb-10 bg-[#f3f1fa] relative rounded-t-3xl mx-2 md:mx-4 mb-0 opacity-0 translate-y-10 transition-all duration-1000 ease-out reveal-section">
     <div class="max-w-6xl mx-auto px-2 sm:px-4">
       
       <!-- Başlık -->
@@ -517,7 +523,7 @@
           <div class="bg-white border border-gray-200 rounded-full p-1 inline-flex items-center mx-auto shadow-sm w-max">
             <button onclick="setHours(2)" id="btn-2saat" class="px-5 py-2 rounded-full text-sm font-bold bg-[#0047ff] text-white transition-all duration-300">2 Saat</button>
             <button onclick="setHours(3)" id="btn-3saat" class="px-5 py-2 rounded-full text-sm font-bold text-gray-500 bg-transparent hover:text-gray-900 transition-all flex items-center">3 Saat</button>
-            <button onclick="setHours(4)" id="btn-4saat" class="px-5 py-2 rounded-full text-sm font-bold text-gray-500 bg-transparent hover:text-gray-900 transition-all flex items-center">4 Saat <span class="bg-emerald-500 text-white text-[10px] px-2 py-0.5 rounded-full ml-1.5 font-bold">%50 İNDİRİM</span></button>
+            <button onclick="setHours(4)" id="btn-4saat" class="px-5 py-2 rounded-full text-sm font-bold text-gray-500 bg-transparent hover:text-gray-900 transition-all flex items-center">4 Saat</button>
           </div>
         </div>
 
@@ -680,7 +686,7 @@
           <!-- Format Toggle (Pill Toggle) -->
           <div class="bg-white border border-gray-200 rounded-full p-1 inline-flex items-center mx-auto shadow-sm w-max">
             <button onclick="setFormat('kocluk', 'online')" id="btn-online-kocluk" class="px-5 py-2 rounded-full text-sm font-bold bg-[#0047ff] text-white transition-all duration-300">Online</button>
-            <button onclick="setFormat('kocluk', 'yuzyuze')" id="btn-yuzyuze-kocluk" class="px-5 py-2 rounded-full text-sm font-bold text-gray-500 bg-transparent hover:text-gray-900 transition-all flex items-center">Yüz Yüze <span class="bg-emerald-500 text-white text-[10px] px-2 py-0.5 rounded-full ml-1.5 font-bold">%50 İNDİRİM</span></button>
+            <button onclick="setFormat('kocluk', 'yuzyuze')" id="btn-yuzyuze-kocluk" class="px-5 py-2 rounded-full text-sm font-bold text-gray-500 bg-transparent hover:text-gray-900 transition-all flex items-center">Yüz Yüze</button>
           </div>
         </div>
 
@@ -762,7 +768,7 @@
   <!-- ══════════════════════════════════════════
        KAMPÜS SECTION
   ══════════════════════════════════════════ -->
-  <section id="kampus" class="max-w-7xl mx-auto px-4 my-20">
+  <section id="kampus" class="max-w-7xl mx-auto px-4 my-20 opacity-0 translate-y-10 transition-all duration-1000 ease-out reveal-section">
     <a href="https://whatsapp.com/channel/0029VbCjF055a246ZyeeUh1I" target="_blank" rel="noopener noreferrer" class="block w-full transition-transform hover:scale-[1.02]">
       <!-- Masaüstü Görseli (Geniş Ekranlar İçin) -->
       <img src="wpkanal.png" alt="Ömer Hoca Kampüs Masaüstü" class="hidden md:block w-full h-auto object-cover rounded-2xl shadow-2xl">
@@ -774,7 +780,7 @@
   <!-- ══════════════════════════════════════════
        YORUMLAR (TESTIMONIALS) SECTION
   ══════════════════════════════════════════ -->
-  <section id="yorumlar" class="max-w-7xl mx-auto px-4 py-20">
+  <section id="yorumlar" class="max-w-7xl mx-auto px-4 py-20 opacity-0 translate-y-10 transition-all duration-1000 ease-out reveal-section">
     
     <!-- Başlık & Açıklama -->
     <div class="text-center mb-12">
@@ -1588,6 +1594,30 @@
     (function() {
       emailjs.init("fbG_xqqONUwYd-nm7");
     })();
+  </script>
+  <!-- Scroll Reveal Animation Logic -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.2 // %20'si görünür olduğunda tetikle
+      };
+
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.remove('opacity-0', 'translate-y-10');
+            entry.target.classList.add('opacity-100', 'translate-y-0');
+            observer.unobserve(entry.target); // Animasyonun sadece 1 kez çalışması için takibi bırak
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.reveal-section').forEach(section => {
+        observer.observe(section);
+      });
+    });
   </script>
 </body>
 </html>
