@@ -159,35 +159,7 @@
 
 <body class="antialiased w-full max-w-[100vw] overflow-x-hidden bg-slate-50">
 
-  <!-- ══════════════════════════════════════════
-       NAVBAR
-  ══════════════════════════════════════════ -->
-  <header id="navbar" class="relative w-full z-50 flex flex-nowrap items-center justify-between px-4 md:px-8 py-3 bg-white border-b border-gray-100 shadow-sm">
-    
-    <!-- Logo ve Pika -->
-    <a href="#hero" id="logo" class="flex items-center justify-start shrink-0">
-      <img src="b25.png" alt="Rakun Logo" class="h-8 md:h-10 w-auto object-contain">
-    </a>
 
-    <!-- Başla Butonu -->
-    <a href="#ozel-ders" class="shrink-0 bg-gradient-to-r from-[#0029b8] to-[#0047ff] text-white px-5 py-2 md:px-6 md:py-2.5 rounded-full font-semibold text-sm md:text-base transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg shadow-[#0047ff]/40 hover:shadow-xl hover:shadow-[#0047ff]/60">
-      Ücretsiz Başla
-    </a>
-
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-white border-t border-gray-100 shadow-lg">
-      <nav class="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-1">
-        <a href="#ozel-ders" class="py-2.5 px-3 rounded-xl text-sm font-semibold text-gray-700 hover:bg-indigo-50 hover:text-[#150338] transition-colors">Özel Ders</a>
-        <a href="#kocluk"    class="py-2.5 px-3 rounded-xl text-sm font-semibold text-gray-700 hover:bg-indigo-50 hover:text-[#150338] transition-colors">Koçluk</a>
-        <a href="#kampus"    class="py-2.5 px-3 rounded-xl text-sm font-semibold text-gray-700 hover:bg-indigo-50 hover:text-[#150338] transition-colors">Kampüs</a>
-        <a href="#iletisim"  class="py-2.5 px-3 rounded-xl text-sm font-semibold text-gray-700 hover:bg-indigo-50 hover:text-[#150338] transition-colors">İletişim</a>
-        <hr class="my-2 border-gray-100" />
-        <a href="#ozel-ders" class="mt-1 text-center text-sm font-bold bg-[#b2eb02] text-white px-5 py-3 rounded-full hover:bg-[#4330d1] transition-all duration-200">
-          Hemen Başla
-        </a>
-      </nav>
-    </div>
-  </header>
 
 
   <!-- ══════════════════════════════════════════
@@ -1214,15 +1186,80 @@
       <span class="nav-label text-[10px] text-gray-500 transition-colors duration-300">Kampüs</span>
     </a>
 
-    <!-- İletişim -->
-    <button onclick="document.getElementById('contact-drawer').classList.remove('translate-x-full'); document.getElementById('drawer-overlay').classList.remove('hidden');" class="nav-item relative flex flex-col items-center gap-0.5 w-[20%] focus:outline-none" data-target="iletisim">
+    <!-- Menü (Hamburger) -->
+    <button onclick="toggleMobileMenu()" class="nav-item relative flex flex-col items-center gap-0.5 w-[20%] focus:outline-none" data-target="menu">
       <div class="icon-bg transition-all duration-400 ease-in-out w-12 h-12 rounded-full flex items-center justify-center bg-transparent text-gray-500 translate-y-0">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path></svg>
       </div>
-      <span class="nav-label text-[10px] text-gray-500 transition-colors duration-300">İletişim</span>
+      <span class="nav-label text-[10px] text-gray-500 transition-colors duration-300">Menü</span>
     </button>
 
   </nav>
+
+  <!-- Açılır Mobil Menü (Bottom Sheet) -->
+  <div id="mobile-menu-overlay" class="fixed inset-0 bg-black/50 z-[60] hidden transition-opacity duration-300 opacity-0" onclick="toggleMobileMenu()"></div>
+  <div id="mobile-bottom-sheet" class="fixed bottom-0 left-0 w-full bg-white z-[70] rounded-t-3xl shadow-2xl transition-transform duration-300 translate-y-full flex flex-col pb-safe">
+    <div class="w-full flex justify-center py-3">
+      <div class="w-12 h-1.5 bg-gray-200 rounded-full"></div>
+    </div>
+    <div class="px-6 pb-8 pt-2 flex flex-col gap-2">
+      <!-- Menü Linkleri -->
+      <a href="#hero" onclick="toggleMobileMenu()" class="flex items-center gap-4 py-3 border-b border-gray-100 text-zinc-800 font-semibold text-[17px]">
+        <svg class="w-6 h-6 text-[#0047ff]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+        Ana Sayfa
+      </a>
+      <a href="#ozel-ders" onclick="toggleMobileMenu()" class="flex items-center gap-4 py-3 border-b border-gray-100 text-zinc-800 font-semibold text-[17px]">
+        <svg class="w-6 h-6 text-[#0047ff]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+        Özel Ders
+      </a>
+      <a href="#kocluk" onclick="toggleMobileMenu()" class="flex items-center gap-4 py-3 border-b border-gray-100 text-zinc-800 font-semibold text-[17px]">
+        <svg class="w-6 h-6 text-[#0047ff]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+        Koçluk
+      </a>
+      <a href="#kampus" onclick="toggleMobileMenu()" class="flex items-center gap-4 py-3 border-b border-gray-100 text-zinc-800 font-semibold text-[17px]">
+        <svg class="w-6 h-6 text-[#0047ff]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+        Kampüs
+      </a>
+      <button onclick="toggleMobileMenu(); document.getElementById('contact-drawer').classList.remove('translate-x-full'); document.getElementById('drawer-overlay').classList.remove('hidden');" class="flex items-center gap-4 py-3 border-b border-gray-100 text-zinc-800 font-semibold text-[17px] text-left">
+        <svg class="w-6 h-6 text-[#0047ff]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+        İletişim
+      </button>
+
+      <!-- Ücretsiz Başla Butonu (Eski Header'daki) -->
+      <a href="#ozel-ders" onclick="toggleMobileMenu()" class="mt-4 flex items-center justify-center gap-2 bg-[#0047ff] text-white py-4 rounded-2xl font-bold text-lg shadow-lg hover:bg-[#0039cc] transition-colors">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+        Ücretsiz Başla
+      </a>
+    </div>
+  </div>
+
+  <script>
+    let isMenuOpen = false;
+    function toggleMobileMenu() {
+      isMenuOpen = !isMenuOpen;
+      const overlay = document.getElementById('mobile-menu-overlay');
+      const sheet = document.getElementById('mobile-bottom-sheet');
+      
+      if (isMenuOpen) {
+        overlay.classList.remove('hidden');
+        // setTimeout for smooth transition
+        setTimeout(() => {
+          overlay.classList.remove('opacity-0');
+          overlay.classList.add('opacity-100');
+          sheet.classList.remove('translate-y-full');
+          sheet.classList.add('translate-y-0');
+        }, 10);
+      } else {
+        overlay.classList.remove('opacity-100');
+        overlay.classList.add('opacity-0');
+        sheet.classList.remove('translate-y-0');
+        sheet.classList.add('translate-y-full');
+        setTimeout(() => {
+          overlay.classList.add('hidden');
+        }, 300);
+      }
+    }
+  </script>
 
   <!-- Alt Navigasyon Scroll Observer & Animation Logic -->
   <script>
