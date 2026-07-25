@@ -480,7 +480,7 @@
   <!-- ══════════════════════════════════════════
        PLACEHOLDER SECTION ANCHORS (for nav links)
   ══════════════════════════════════════════ -->
-    <section id="ozel-ders" class="pt-20 md:pt-24 pb-8 md:pb-10 bg-[#f3f1fa] relative rounded-t-3xl mx-2 md:mx-4 mb-0 opacity-0 translate-y-10 transition-all duration-1000 ease-out reveal-section">
+    <section id="ozel-ders" class="py-12 md:py-16 bg-[#eff6ff] relative rounded-t-3xl mx-2 md:mx-4 mb-0 opacity-0 translate-y-10 transition-all duration-1000 ease-out reveal-section">
     <div class="max-w-6xl mx-auto px-2 sm:px-4">
       
       <!-- Başlık -->
@@ -493,8 +493,8 @@
         <p class="text-gray-600 text-base md:text-lg">Seçimini yaparak sana uygun programın detaylarını inceleyebilirsin.</p>
       </div>
 
-      <!-- Sekmeler (Tabs) -->
-      <div class="flex justify-center mb-8">
+      <!-- Sekmeler (Tabs - Sadece Mobilde) -->
+      <div class="flex justify-center mb-8 lg:hidden">
         <div class="bg-white rounded-full shadow-sm p-1.5 flex items-center gap-1 border border-gray-100">
           <button onclick="showTab('lgs')" id="tab-btn-lgs" class="tab-btn px-6 py-2.5 rounded-full font-bold text-sm transition-all duration-200 bg-gradient-to-r from-[#0029b8] to-[#0047ff] text-white shadow-md shadow-[#0047ff]/40">LGS</button>
           <button onclick="showTab('yks')" id="tab-btn-yks" class="tab-btn px-6 py-2.5 rounded-full font-bold text-sm transition-all duration-200 text-gray-700 hover:bg-gray-50">YKS</button>
@@ -502,156 +502,166 @@
         </div>
       </div>
 
-      <!-- Paket Kartı -->
-      <div class="bg-white rounded-[2rem] shadow-xl px-5 py-8 md:px-8 md:py-10 relative animate-fade-up w-full max-w-sm md:max-w-md mx-auto border-2 border-[#0047ff]">
+      <!-- KARTLAR GRID KAPSAYICI -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 w-full max-w-7xl mx-auto mt-10 px-4">
         
-        <!-- Rozet -->
-        <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-white text-zinc-900 border-2 border-[#0047ff] px-5 py-1.5 rounded-full text-sm font-bold flex items-center shadow-sm whitespace-nowrap z-20">
-          <span id="paket-rozet" class="flex items-center gap-1.5 text-zinc-800">👍 En Popüler</span>
-        </div>
-
-        <!-- Kart Başlık -->
-        <div class="text-center mb-6 mt-2 relative z-20">
-          <h3 id="paket-baslik" class="text-2xl font-extrabold text-zinc-900 mb-4">LGS Özel Ders</h3>
-          
-          <!-- Sınırlı Kontenjan (Opsiyonel) -->
-          <div class="mb-4">
-            <span class="inline-flex items-center gap-1 bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-bold">🚨 Sınırlı Kontenjan</span>
+        <!-- LGS KARTI -->
+        <div id="card-lgs" class="w-full block lg:block bg-white rounded-[2rem] shadow-xl px-5 py-8 md:px-8 md:py-10 relative animate-fade-up border-2 border-[#0047ff]">
+          <!-- Rozet -->
+          <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-white text-zinc-900 border-2 border-[#0047ff] px-5 py-1.5 rounded-full text-sm font-bold flex items-center shadow-sm whitespace-nowrap z-20">
+            <span class="flex items-center gap-1.5 text-zinc-800">👍 En Popüler</span>
           </div>
 
-          <!-- Saat Seçimi Modülü (Pill Toggle) -->
-          <div class="bg-white border border-gray-200 rounded-full p-1 inline-flex items-center mx-auto shadow-sm w-max">
-            <button onclick="setHours(2)" id="btn-2saat" class="px-5 py-2 rounded-full text-sm font-bold bg-[#0047ff] text-white transition-all duration-300">2 Saat</button>
-            <button onclick="setHours(3)" id="btn-3saat" class="px-5 py-2 rounded-full text-sm font-bold text-gray-500 bg-transparent hover:text-gray-900 transition-all flex items-center">3 Saat</button>
-            <button onclick="setHours(4)" id="btn-4saat" class="px-5 py-2 rounded-full text-sm font-bold text-gray-500 bg-transparent hover:text-gray-900 transition-all flex items-center">4 Saat</button>
-          </div>
-        </div>
-
-        <!-- Görsel / Video Alanı -->
-        <div id="ozel-ders-video-container" 
-             class="mb-6 w-full aspect-video bg-gray-50 rounded-2xl overflow-hidden relative border border-gray-100 shadow-inner cursor-pointer group"
-             onclick="this.innerHTML='<iframe class=\'w-full h-full\' src=\'https://www.youtube.com/embed/VIDEO_ID_BURAYA?autoplay=1\' title=\'Özel Ders Video\' frameborder=\'0\' allow=\'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\' allowfullscreen></iframe>'; this.onclick=null; this.classList.remove('cursor-pointer', 'group');">
-          <img src="lgs1.png" alt="LGS Özel Ders" class="w-full h-full object-cover">
-          <div class="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/20 transition-colors">
-            <!-- YouTube Play Butonu -->
-            <div class="w-12 h-12 bg-[#ff0000] text-white rounded-full flex items-center justify-center shadow-[0_4px_15px_rgba(255,0,0,0.4)] transform group-hover:scale-110 transition-transform duration-300">
-              <svg class="w-6 h-6 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          <!-- Kart Başlık -->
+          <div class="text-center mb-6 mt-2 relative z-20">
+            <h3 class="text-2xl font-extrabold text-zinc-900 mb-4">LGS Özel Ders</h3>
+            <div class="mb-4">
+              <span class="inline-flex items-center gap-1 bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-bold">🚨 Sınırlı Kontenjan</span>
+            </div>
+            <!-- Saat Seçimi Modülü -->
+            <div class="bg-white border border-gray-200 rounded-full p-1 inline-flex items-center mx-auto shadow-sm w-max">
+              <button onclick="setHours(2, 'lgs')" id="btn-2saat-lgs" class="px-5 py-2 rounded-full text-sm font-bold bg-[#0047ff] text-white transition-all duration-300">2 Saat</button>
+              <button onclick="setHours(3, 'lgs')" id="btn-3saat-lgs" class="px-5 py-2 rounded-full text-sm font-bold text-gray-500 bg-transparent hover:text-gray-900 transition-all flex items-center">3 Saat</button>
+              <button onclick="setHours(4, 'lgs')" id="btn-4saat-lgs" class="px-5 py-2 rounded-full text-sm font-bold text-gray-500 bg-transparent hover:text-gray-900 transition-all flex items-center">4 Saat</button>
             </div>
           </div>
+
+          <!-- Görsel / Video Alanı -->
+          <div id="ozel-ders-video-container-lgs" class="mb-6 w-full aspect-video bg-gray-50 rounded-2xl overflow-hidden relative border border-gray-100 shadow-inner cursor-pointer group" onclick="this.innerHTML='<iframe class=\'w-full h-full\' src=\'https://www.youtube.com/embed/VIDEO_ID_BURAYA?autoplay=1\' title=\'Özel Ders Video\' frameborder=\'0\' allow=\'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\' allowfullscreen></iframe>'; this.onclick=null; this.classList.remove('cursor-pointer', 'group');">
+            <img src="lgs1.png" alt="LGS Özel Ders" class="w-full h-full object-cover">
+            <div class="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/20 transition-colors">
+              <div class="w-12 h-12 bg-[#ff0000] text-white rounded-full flex items-center justify-center shadow-[0_4px_15px_rgba(255,0,0,0.4)] transform group-hover:scale-110 transition-transform duration-300">
+                <svg class="w-6 h-6 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fiyat Alanı -->
+          <div class="flex flex-col gap-1 mb-6">
+            <div id="discount-row-lgs" class="hidden items-center gap-2">
+              <span id="old-price-lgs" class="line-through text-gray-400 font-bold text-lg"></span>
+              <span id="discount-badge-lgs" class="bg-emerald-500 text-white px-2 py-0.5 rounded-md text-xs font-bold flex items-center gap-1"></span>
+            </div>
+            <div id="price-ozel-ders-lgs" class="flex items-end gap-2">
+              <span class="text-4xl font-extrabold text-zinc-900">₺2.000</span>
+            </div>
+            <p class="text-gray-500 text-sm mt-1 font-medium pb-4 border-b border-gray-100">Hedeflerine ulaşmanda tam da ihtiyacın olan destek.</p>
+          </div>
+
+          <!-- Buton -->
+          <button class="w-full bg-[#0047ff] text-white py-2.5 rounded-full font-semibold text-base hover:bg-[#0039cc] transition-all duration-300 shadow-md shadow-[#0047ff]/30 active:scale-[0.98] mb-8">
+            Ücretsiz Derse Başla
+          </button>
+
+          <!-- ÖZELLİKLER BAŞLIĞI -->
+          <p class="text-xs font-bold text-gray-400 tracking-wider mb-4">ÖZELLİKLER</p>
+          <ul class="space-y-3 block">
+            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg><span class="text-zinc-700 font-medium text-sm">Öğrenciye özel PDF'ler</span></li>
+            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg><span class="text-zinc-700 font-medium text-sm">Kitap ve doküman desteği</span></li>
+            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg><span class="text-zinc-700 font-medium text-sm">Düzenli deneme ve takibi</span></li>
+            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg><span class="text-zinc-700 font-medium text-sm">Online kütüphane ile beraber ders çalışma</span></li>
+            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg><span class="text-zinc-700 font-medium text-sm">Öğrenciye Özel Eksik Konu Analizi</span></li>
+            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg><span class="text-zinc-700 font-medium text-sm">7/24 soru sorabilme</span></li>
+            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg><span class="text-zinc-700 font-medium text-sm">Ücretsiz tanışma dersi</span></li>
+          </ul>
         </div>
 
-        <!-- Fiyat Alanı -->
-        <div class="flex flex-col gap-1 mb-6">
-          <div id="discount-row" class="hidden items-center gap-2">
-            <span id="old-price" class="line-through text-gray-400 font-bold text-lg"></span>
-            <span id="discount-badge" class="bg-emerald-500 text-white px-2 py-0.5 rounded-md text-xs font-bold flex items-center gap-1"></span>
+        <!-- YKS KARTI -->
+        <div id="card-yks" class="w-full hidden lg:block bg-white rounded-[2rem] shadow-xl px-5 py-8 md:px-8 md:py-10 relative animate-fade-up border-2 border-transparent lg:border-[#0047ff]">
+          <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-white text-zinc-900 border-2 border-[#0047ff] px-5 py-1.5 rounded-full text-sm font-bold flex items-center shadow-sm whitespace-nowrap z-20">
+            <span class="flex items-center gap-1.5 text-zinc-800">🔥 En Çok Seçilen</span>
           </div>
-          <div id="price-ozel-ders" class="flex items-end gap-2">
-            <span class="text-4xl font-extrabold text-zinc-900">₺2.000</span>
+          <div class="text-center mb-6 mt-2 relative z-20">
+            <h3 class="text-2xl font-extrabold text-zinc-900 mb-4">YKS Özel Ders</h3>
+            <div class="mb-4">
+              <span class="inline-flex items-center gap-1 bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-bold">🚨 Sınırlı Kontenjan</span>
+            </div>
+            <div class="bg-white border border-gray-200 rounded-full p-1 inline-flex items-center mx-auto shadow-sm w-max">
+              <button onclick="setHours(2, 'yks')" id="btn-2saat-yks" class="px-5 py-2 rounded-full text-sm font-bold bg-[#0047ff] text-white transition-all duration-300">2 Saat</button>
+              <button onclick="setHours(3, 'yks')" id="btn-3saat-yks" class="px-5 py-2 rounded-full text-sm font-bold text-gray-500 bg-transparent hover:text-gray-900 transition-all flex items-center">3 Saat</button>
+              <button onclick="setHours(4, 'yks')" id="btn-4saat-yks" class="px-5 py-2 rounded-full text-sm font-bold text-gray-500 bg-transparent hover:text-gray-900 transition-all flex items-center">4 Saat</button>
+            </div>
           </div>
-          <p class="text-gray-500 text-sm mt-1 font-medium pb-4 border-b border-gray-100">Hedeflerine ulaşmanda tam da ihtiyacın olan destek.</p>
+          <div id="ozel-ders-video-container-yks" class="mb-6 w-full aspect-video bg-gray-50 rounded-2xl overflow-hidden relative border border-gray-100 shadow-inner cursor-pointer group" onclick="this.innerHTML='<iframe class=\'w-full h-full\' src=\'https://www.youtube.com/embed/VIDEO_ID_BURAYA?autoplay=1\' title=\'Özel Ders Video\' frameborder=\'0\' allow=\'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\' allowfullscreen></iframe>'; this.onclick=null; this.classList.remove('cursor-pointer', 'group');">
+            <img src="yks1.png" alt="YKS Özel Ders" class="w-full h-full object-cover">
+            <div class="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/20 transition-colors">
+              <div class="w-12 h-12 bg-[#ff0000] text-white rounded-full flex items-center justify-center shadow-[0_4px_15px_rgba(255,0,0,0.4)] transform group-hover:scale-110 transition-transform duration-300">
+                <svg class="w-6 h-6 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-col gap-1 mb-6">
+            <div id="discount-row-yks" class="hidden items-center gap-2">
+              <span id="old-price-yks" class="line-through text-gray-400 font-bold text-lg"></span>
+              <span id="discount-badge-yks" class="bg-emerald-500 text-white px-2 py-0.5 rounded-md text-xs font-bold flex items-center gap-1"></span>
+            </div>
+            <div id="price-ozel-ders-yks" class="flex items-end gap-2">
+              <span class="text-4xl font-extrabold text-zinc-900">₺2.000</span>
+            </div>
+            <p class="text-gray-500 text-sm mt-1 font-medium pb-4 border-b border-gray-100">Hedeflerine ulaşmanda tam da ihtiyacın olan destek.</p>
+          </div>
+          <button class="w-full bg-[#0047ff] text-white py-2.5 rounded-full font-semibold text-base hover:bg-[#0039cc] transition-all duration-300 shadow-md shadow-[#0047ff]/30 active:scale-[0.98] mb-8">
+            Ücretsiz Derse Başla
+          </button>
+          <p class="text-xs font-bold text-gray-400 tracking-wider mb-4">ÖZELLİKLER</p>
+          <ul class="space-y-3 block">
+            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg><span class="text-zinc-700 font-medium text-sm">Öğrenciye özel PDF'ler</span></li>
+            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg><span class="text-zinc-700 font-medium text-sm">Kitap ve doküman desteği</span></li>
+            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg><span class="text-zinc-700 font-medium text-sm">Düzenli deneme ve takibi</span></li>
+            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg><span class="text-zinc-700 font-medium text-sm">Online kütüphane ile beraber ders çalışma</span></li>
+            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg><span class="text-zinc-700 font-medium text-sm">Öğrenciye Özel Eksik Konu Analizi</span></li>
+            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg><span class="text-zinc-700 font-medium text-sm">7/24 soru sorabilme</span></li>
+            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg><span class="text-zinc-700 font-medium text-sm">Ücretsiz tanışma dersi</span></li>
+          </ul>
         </div>
 
-        <!-- Buton -->
-        <button class="w-full bg-[#0047ff] text-white py-2.5 rounded-full font-semibold text-base hover:bg-[#0039cc] transition-all duration-300 shadow-md shadow-[#0047ff]/30 active:scale-[0.98] mb-8">
-          Ücretsiz Derse Başla
-        </button>
-
-        <!-- ÖZELLİKLER BAŞLIĞI -->
-        <p class="text-xs font-bold text-gray-400 tracking-wider mb-4">ÖZELLİKLER</p>
-
-        <!-- LGS İçerik (Varsayılan Görünür) -->
-        <ul id="content-lgs" class="space-y-3 block">
-          <li class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
-            <span class="text-zinc-700 font-medium text-sm">Öğrenciye özel PDF'ler</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
-            <span class="text-zinc-700 font-medium text-sm">Kitap ve doküman desteği</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
-            <span class="text-zinc-700 font-medium text-sm">Düzenli deneme ve takibi</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
-            <span class="text-zinc-700 font-medium text-sm">Online kütüphane ile beraber ders çalışma</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
-            <span class="text-zinc-700 font-medium text-sm">Öğrenciye Özel Eksik Konu Analizi</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
-            <span class="text-zinc-700 font-medium text-sm">7/24 soru sorabilme</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
-            <span class="text-zinc-700 font-medium text-sm">Ücretsiz tanışma dersi</span>
-          </li>
-        </ul>
-
-        <!-- YKS İçerik (Gizli) -->
-        <ul id="content-yks" class="space-y-3 hidden">
-          <li class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
-            <span class="text-zinc-700 font-medium text-sm">Öğrenciye özel PDF'ler</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
-            <span class="text-zinc-700 font-medium text-sm">Kitap ve doküman desteği</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
-            <span class="text-zinc-700 font-medium text-sm">Düzenli deneme ve takibi</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
-            <span class="text-zinc-700 font-medium text-sm">Online kütüphane ile beraber ders çalışma</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
-            <span class="text-zinc-700 font-medium text-sm">Öğrenciye Özel Eksik Konu Analizi</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
-            <span class="text-zinc-700 font-medium text-sm">7/24 soru sorabilme</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
-            <span class="text-zinc-700 font-medium text-sm">Ücretsiz tanışma dersi</span>
-          </li>
-        </ul>
-
-        <!-- Ara Sınıf İçerik (Gizli) -->
-        <ul id="content-arasinif" class="space-y-3 hidden">
-          <li class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
-            <span class="text-zinc-700 font-medium text-sm">Maarif modele uygun PDF'ler</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
-            <span class="text-zinc-700 font-medium text-sm">Yazılılara özel kamplar</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
-            <span class="text-zinc-700 font-medium text-sm">Kitap ve doküman desteği</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
-            <span class="text-zinc-700 font-medium text-sm">Düzenli deneme ve takibi</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
-            <span class="text-zinc-700 font-medium text-sm">7/24 soru sorabilme</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
-            <span class="text-zinc-700 font-medium text-sm">Ücretsiz tanışma dersi</span>
-          </li>
-        </ul>
-
+        <!-- ARA SINIF KARTI -->
+        <div id="card-arasinif" class="w-full hidden lg:block bg-white rounded-[2rem] shadow-xl px-5 py-8 md:px-8 md:py-10 relative animate-fade-up border-2 border-transparent lg:border-[#0047ff]">
+          <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-white text-zinc-900 border-2 border-[#0047ff] px-5 py-1.5 rounded-full text-sm font-bold flex items-center shadow-sm whitespace-nowrap z-20">
+            <span class="flex items-center gap-1.5 text-zinc-800">⏳ Sınırlı Kontenjan</span>
+          </div>
+          <div class="text-center mb-6 mt-2 relative z-20">
+            <h3 class="text-2xl font-extrabold text-zinc-900 mb-4">Ara Sınıf Özel Ders</h3>
+            <div class="mb-4">
+              <span class="inline-flex items-center gap-1 bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-bold">🚨 Sınırlı Kontenjan</span>
+            </div>
+            <div class="bg-white border border-gray-200 rounded-full p-1 inline-flex items-center mx-auto shadow-sm w-max">
+              <button onclick="setHours(2, 'arasinif')" id="btn-2saat-arasinif" class="px-5 py-2 rounded-full text-sm font-bold bg-[#0047ff] text-white transition-all duration-300">2 Saat</button>
+              <button onclick="setHours(3, 'arasinif')" id="btn-3saat-arasinif" class="px-5 py-2 rounded-full text-sm font-bold text-gray-500 bg-transparent hover:text-gray-900 transition-all flex items-center">3 Saat</button>
+              <button onclick="setHours(4, 'arasinif')" id="btn-4saat-arasinif" class="px-5 py-2 rounded-full text-sm font-bold text-gray-500 bg-transparent hover:text-gray-900 transition-all flex items-center">4 Saat</button>
+            </div>
+          </div>
+          <div id="ozel-ders-video-container-arasinif" class="mb-6 w-full aspect-video bg-gray-50 rounded-2xl overflow-hidden relative border border-gray-100 shadow-inner cursor-pointer group" onclick="this.innerHTML='<iframe class=\'w-full h-full\' src=\'https://www.youtube.com/embed/VIDEO_ID_BURAYA?autoplay=1\' title=\'Özel Ders Video\' frameborder=\'0\' allow=\'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\' allowfullscreen></iframe>'; this.onclick=null; this.classList.remove('cursor-pointer', 'group');">
+            <img src="arasınıf1.png" alt="Ara Sınıf Özel Ders" class="w-full h-full object-cover">
+            <div class="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/20 transition-colors">
+              <div class="w-12 h-12 bg-[#ff0000] text-white rounded-full flex items-center justify-center shadow-[0_4px_15px_rgba(255,0,0,0.4)] transform group-hover:scale-110 transition-transform duration-300">
+                <svg class="w-6 h-6 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-col gap-1 mb-6">
+            <div id="discount-row-arasinif" class="hidden items-center gap-2">
+              <span id="old-price-arasinif" class="line-through text-gray-400 font-bold text-lg"></span>
+              <span id="discount-badge-arasinif" class="bg-emerald-500 text-white px-2 py-0.5 rounded-md text-xs font-bold flex items-center gap-1"></span>
+            </div>
+            <div id="price-ozel-ders-arasinif" class="flex items-end gap-2">
+              <span class="text-4xl font-extrabold text-zinc-900">₺2.000</span>
+            </div>
+            <p class="text-gray-500 text-sm mt-1 font-medium pb-4 border-b border-gray-100">Hedeflerine ulaşmanda tam da ihtiyacın olan destek.</p>
+          </div>
+          <button class="w-full bg-[#0047ff] text-white py-2.5 rounded-full font-semibold text-base hover:bg-[#0039cc] transition-all duration-300 shadow-md shadow-[#0047ff]/30 active:scale-[0.98] mb-8">
+            Ücretsiz Derse Başla
+          </button>
+          <p class="text-xs font-bold text-gray-400 tracking-wider mb-4">ÖZELLİKLER</p>
+          <ul class="space-y-3 block">
+            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg><span class="text-zinc-700 font-medium text-sm">Maarif modele uygun PDF'ler</span></li>
+            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg><span class="text-zinc-700 font-medium text-sm">Yazılılara özel kamplar</span></li>
+            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg><span class="text-zinc-700 font-medium text-sm">Kitap ve doküman desteği</span></li>
+            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg><span class="text-zinc-700 font-medium text-sm">Düzenli deneme ve takibi</span></li>
+            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg><span class="text-zinc-700 font-medium text-sm">Online kütüphane ile beraber ders çalışma</span></li>
+            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg><span class="text-zinc-700 font-medium text-sm">Öğrenciye Özel Eksik Konu Analizi</span></li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
@@ -1166,9 +1176,9 @@
   <nav id="bottom-nav" class="md:hidden fixed bottom-0 w-full bg-white flex justify-between items-center px-4 py-3 pb-safe z-[50] rounded-t-3xl shadow-[0_-4px_15px_rgba(0,0,0,0.05)] overflow-visible">
 
     <!-- Sol Taraf (Aksiyon Butonu) -->
-    <a href="#ozel-ders" class="bg-[#0047ff] text-white rounded-full px-5 py-2 font-medium text-sm focus:outline-none shadow-md shadow-[#0047ff]/30">
-      Derse Başla
-    </a>
+    <button onclick="document.getElementById('auth-modal').classList.remove('hidden')" class="bg-[#0047ff] text-white rounded-full px-5 py-2 font-medium text-sm focus:outline-none shadow-md shadow-[#0047ff]/30">
+      Giriş Yap
+    </button>
 
     <!-- Orta Kısım (Logo ve Yukarı Scroll) -->
     <button onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" class="focus:outline-none flex justify-center">
@@ -1282,48 +1292,38 @@
   <!-- Custom Tab Logic -->
   <script>
     function showTab(tabName) {
-      // İçerikleri gizle
-      document.getElementById('content-lgs').classList.add('hidden');
-      document.getElementById('content-yks').classList.add('hidden');
-      document.getElementById('content-arasinif').classList.add('hidden');
-      
-      document.getElementById('content-lgs').classList.remove('block');
-      document.getElementById('content-yks').classList.remove('block');
-      document.getElementById('content-arasinif').classList.remove('block');
-      
-      // Buton renklerini sıfırla
+      // 1. Sekme (Tab) Buton renklerini sıfırla (Sadece Mobilde Görünür)
       const btns = document.querySelectorAll('.tab-btn');
       btns.forEach(btn => {
         btn.classList.remove('bg-gradient-to-r', 'from-[#0029b8]', 'to-[#0047ff]', 'text-white', 'shadow-md', 'shadow-[#0047ff]/40');
         btn.classList.add('text-gray-700', 'hover:bg-gray-50');
       });
 
-      // Seçileni göster
-      document.getElementById('content-' + tabName).classList.remove('hidden');
-      document.getElementById('content-' + tabName).classList.add('block');
-      
-      // Başlıkları ve Rozetleri güncelle
-      const baslik = document.getElementById('paket-baslik');
-      const rozet = document.getElementById('paket-rozet');
-      
-      if (tabName === 'lgs') {
-        baslik.textContent = 'LGS Özel Ders';
-        rozet.innerHTML = '👍 En Popüler';
-      } else if (tabName === 'yks') {
-        baslik.textContent = 'YKS Özel Ders';
-        rozet.innerHTML = '🔥 En Çok Seçilen';
-      } else if (tabName === 'arasinif') {
-        baslik.textContent = 'Ara Sınıf Özel Ders';
-        rozet.innerHTML = '⏳ Sınırlı Kontenjan';
-      }
-
       // Butonu aktif yap
       const activeBtn = document.getElementById('tab-btn-' + tabName);
-      activeBtn.classList.remove('text-gray-700', 'hover:bg-gray-50');
-      activeBtn.classList.add('bg-gradient-to-r', 'from-[#0029b8]', 'to-[#0047ff]', 'text-white', 'shadow-md', 'shadow-[#0047ff]/40');
+      if(activeBtn) {
+        activeBtn.classList.remove('text-gray-700', 'hover:bg-gray-50');
+        activeBtn.classList.add('bg-gradient-to-r', 'from-[#0029b8]', 'to-[#0047ff]', 'text-white', 'shadow-md', 'shadow-[#0047ff]/40');
+      }
 
-      // Video kapağını dinamik güncelle ve oynatılan videoyu sıfırla
-      const videoContainer = document.getElementById('ozel-ders-video-container');
+      // 2. Mobilde Sekme Mantığı, Masaüstünde 3'lü Grid:
+      ['lgs', 'yks', 'arasinif'].forEach(id => {
+        const card = document.getElementById('card-' + id);
+        if (card) {
+          if (id === tabName) {
+            // Mobilde göster, masaüstünde mavi border ekle
+            card.classList.remove('hidden', 'border-transparent');
+            card.classList.add('block', 'border-[#0047ff]');
+          } else {
+            // Mobilde gizle (masaüstünde lg:block sayesinde hep açık kalır), mavi border'ı sil
+            card.classList.remove('block', 'border-[#0047ff]');
+            card.classList.add('hidden', 'border-transparent');
+          }
+        }
+      });
+      
+      // Video kapağını dinamik güncelle ve oynatılan videoyu sıfırla (Mobilde geçiş yaparken)
+      const videoContainer = document.getElementById('ozel-ders-video-container-' + tabName);
       if (videoContainer) {
         let imgSrc = 'lgs1.png';
         if (tabName === 'yks') imgSrc = 'yks1.png';
@@ -1457,14 +1457,16 @@
   </div>
 
   <script>
-    function setHours(hours) {
-      const btn2 = document.getElementById('btn-2saat');
-      const btn3 = document.getElementById('btn-3saat');
-      const btn4 = document.getElementById('btn-4saat');
-      const discountRow = document.getElementById('discount-row');
-      const oldPrice = document.getElementById('old-price');
-      const discountBadge = document.getElementById('discount-badge');
-      const priceDiv = document.getElementById('price-ozel-ders');
+    function setHours(hours, tabName = 'lgs') {
+      const btn2 = document.getElementById(`btn-2saat-${tabName}`);
+      const btn3 = document.getElementById(`btn-3saat-${tabName}`);
+      const btn4 = document.getElementById(`btn-4saat-${tabName}`);
+      const discountRow = document.getElementById(`discount-row-${tabName}`);
+      const oldPrice = document.getElementById(`old-price-${tabName}`);
+      const discountBadge = document.getElementById(`discount-badge-${tabName}`);
+      const priceDiv = document.getElementById(`price-ozel-ders-${tabName}`);
+
+      if (!btn2) return;
 
       const activeClass = "px-5 py-2 rounded-full text-sm font-bold bg-[#0047ff] text-white transition-all duration-300 shadow-lg shadow-[#0047ff]/40 hover:shadow-xl hover:shadow-[#0047ff]/60";
       const inactiveClass = "px-5 py-2 rounded-full text-sm font-bold text-gray-500 bg-transparent hover:text-gray-900 transition-all duration-300";
@@ -1648,6 +1650,93 @@
       document.querySelectorAll('.reveal-section').forEach(section => {
         observer.observe(section);
       });
+    });
+  </script>
+  <!-- Auth Modal -->
+  <div id="auth-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+    <div class="bg-white rounded-[2rem] w-full max-w-md p-8 shadow-2xl relative animate-fade-up border border-gray-100">
+      <!-- Kapat Butonu -->
+      <button onclick="document.getElementById('auth-modal').classList.add('hidden')" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700 transition-colors bg-gray-50 rounded-full p-2">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+      
+      <!-- Başlık -->
+      <div class="text-center mb-8">
+        <div class="w-16 h-16 bg-blue-50 text-[#0047ff] rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path></svg>
+        </div>
+        <h2 class="text-3xl font-black text-[#1b004e] mb-2 tracking-tight">Giriş Yap</h2>
+        <p class="text-gray-500 text-sm font-medium">Sisteme erişmek için bilgilerinizi girin.</p>
+      </div>
+
+      <!-- Firebase Google Login -->
+      <div class="flex flex-col gap-4 mt-6">
+        <button id="google-login-btn" class="w-full bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 py-3.5 rounded-xl font-bold text-lg transition-all shadow-sm active:scale-[0.98] flex justify-center items-center gap-3">
+          <svg class="w-6 h-6" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/><path d="M1 1h22v22H1z" fill="none"/></svg>
+          Google ile Giriş Yap
+        </button>
+      </div>
+
+      <!-- İpucu -->
+      <div class="mt-6 p-3 bg-blue-50 text-[#0047ff] text-xs rounded-lg text-center font-bold">
+        Admin e-postanız (Firebase Console'dan belirlediğiniz) ile giriş yaparsanız Admin Paneline, diğer tüm Google hesaplarıyla Öğrenci Paneline yönlendirilirsiniz.
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { auth, googleProvider, signInWithPopup, onAuthStateChanged, db } from './firebase-config.js';
+    import { collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+    const loginBtn = document.getElementById('google-login-btn');
+    if (loginBtn) {
+      loginBtn.addEventListener('click', async () => {
+        try {
+          const result = await signInWithPopup(auth, googleProvider);
+          const user = result.user;
+          
+          if (user.email === 'omerfarukmetin037@gmail.com') {
+            window.location.href = 'admin-ogrenciler.html';
+            return;
+          }
+
+          // VIP Kontrolü
+          const q = query(collection(db, "approved_students"), where("email", "==", user.email.toLowerCase()));
+          const querySnapshot = await getDocs(q);
+
+          if (!querySnapshot.empty) {
+            window.location.href = 'ogrenci-paneli.html';
+          } else {
+            await auth.signOut();
+            alert("Bu platform sadece Ömer Hoca'nın özel ders öğrencilerine açıktır. Sisteme erişim izniniz bulunmamaktadır.");
+          }
+        } catch (error) {
+          console.error("Giriş hatası:", error);
+          alert("Giriş yapılırken bir hata oluştu: " + error.message);
+        }
+      });
+    }
+
+    // Kullanıcı zaten giriş yapmışsa direkt panele yönlendir
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        if (user.email === 'omerfarukmetin037@gmail.com') {
+          window.location.href = 'admin-ogrenciler.html';
+        } else {
+          // Öğrenci paneline yönlendirmeden önce veritabanında var mı emin ol
+          try {
+            const q = query(collection(db, "approved_students"), where("email", "==", user.email.toLowerCase()));
+            const querySnapshot = await getDocs(q);
+            if (!querySnapshot.empty) {
+              window.location.href = 'ogrenci-paneli.html';
+            } else {
+              await auth.signOut();
+            }
+          } catch(err) {
+            console.error("Yetki kontrol hatası", err);
+          }
+        }
+      }
     });
   </script>
 </body>
