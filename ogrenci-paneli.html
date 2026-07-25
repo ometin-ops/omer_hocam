@@ -43,6 +43,10 @@
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
           Ders Programım
         </a>
+        <a href="#" onclick="showSection('odevler')" id="nav-odevler" class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-50 hover:text-slate-900 rounded-xl font-bold transition-all">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+          Ödevlerim
+        </a>
       </nav>
     </div>
 
@@ -108,6 +112,11 @@
       <button onclick="showSection('takvim'); toggleBottomSheet()" id="mob-sheet-takvim" class="flex items-center gap-4 p-4 text-slate-600 hover:bg-slate-50 rounded-2xl font-bold transition-all w-full text-left">
         <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
         <span class="text-lg">Ders Programım</span>
+      </button>
+
+      <button onclick="showSection('odevler'); toggleBottomSheet()" id="mob-sheet-odevler" class="flex items-center gap-4 p-4 text-slate-600 hover:bg-slate-50 rounded-2xl font-bold transition-all w-full text-left">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+        <span class="text-lg">Ödevlerim</span>
       </button>
     </div>
   </div>
@@ -263,7 +272,7 @@
         <p class="text-slate-500 font-bold">Henüz hiç soru göndermediniz.</p>
       </div>
 
-      <div class="grid grid-cols-1 gap-4" id="my-questions-grid">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="my-questions-grid">
         <!-- Sorular JS ile buraya gelecek -->
       </div>
     </section>
@@ -329,13 +338,62 @@
       </div>
     </section>
 
+    <!-- 6. ÖDEVLERİM SECTION -->
+    <section id="section-odevler" class="hidden animate-fade-up transition-opacity duration-300">
+      <div class="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h1 class="text-3xl font-black text-slate-900 tracking-tight">Ödevlerim</h1>
+          <p class="text-slate-500 mt-2 font-medium">Ömer Hoca'nın size atadığı tüm ödevleri buradan takip edebilir ve tamamlandı olarak işaretleyebilirsiniz.</p>
+        </div>
+      </div>
+
+      <div id="loading-odev" class="text-center py-10 hidden">
+        <p class="text-slate-500 font-bold">Ödevleriniz Yükleniyor...</p>
+      </div>
+      
+      <div id="empty-odev" class="text-center py-16 bg-white rounded-3xl border border-slate-100 shadow-sm hidden">
+        <div class="w-16 h-16 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+        </div>
+        <p class="text-slate-500 font-bold text-lg">Şu an için atanmış bir ödeviniz bulunmuyor.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="odevler-grid">
+        <!-- Ödevler buraya render edilecek -->
+      </div>
+    </section>
+
   </main>
 
+  <!-- Image Modal (Lightbox) -->
+  <div id="image-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 hidden p-4 transition-opacity cursor-zoom-out" onclick="closeImageModal()">
+    <button class="absolute top-6 right-6 text-white hover:text-gray-300 z-50" onclick="closeImageModal()">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    </button>
+    <img id="modal-image" src="" class="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl relative z-40 cursor-auto" />
+  </div>
+
   <script>
+    // Image Modal Logic
+    window.openImageModal = (imgSrc, event) => {
+      if(event) event.preventDefault();
+      document.getElementById('modal-image').src = imgSrc;
+      document.getElementById('image-modal').classList.remove('hidden');
+    }
+    
+    window.closeImageModal = () => {
+      document.getElementById('image-modal').classList.add('hidden');
+      document.getElementById('modal-image').src = '';
+    }
+    
+    document.getElementById('modal-image').addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+
     // Tab Navigation Logic
     function showSection(sectionId) {
       // Hide all sections
-      const sections = ['matematik', 'oyunlar', 'kronometre', 'sorular', 'takvim'];
+      const sections = ['matematik', 'oyunlar', 'kronometre', 'sorular', 'takvim', 'odevler'];
       sections.forEach(id => {
         const sec = document.getElementById('section-' + id);
         if(sec) {
@@ -345,7 +403,7 @@
       });
       
       // Reset Desktop Nav Styles
-      const desktopNavs = ['nav-matematik', 'nav-oyunlar', 'nav-kronometre', 'nav-sorular', 'nav-takvim'];
+      const desktopNavs = ['nav-matematik', 'nav-oyunlar', 'nav-kronometre', 'nav-sorular', 'nav-takvim', 'nav-odevler'];
       desktopNavs.forEach(id => {
         const el = document.getElementById(id);
         if (el) {
@@ -354,7 +412,7 @@
       });
 
       // Reset Mobile Sheet Styles
-      const mobileSheets = ['mob-sheet-matematik', 'mob-sheet-oyunlar', 'mob-sheet-kronometre', 'mob-sheet-sorular', 'mob-sheet-takvim'];
+      const mobileSheets = ['mob-sheet-matematik', 'mob-sheet-oyunlar', 'mob-sheet-kronometre', 'mob-sheet-sorular', 'mob-sheet-takvim', 'mob-sheet-odevler'];
       mobileSheets.forEach(id => {
         const el = document.getElementById(id);
         if (el) {
@@ -705,24 +763,18 @@
               let actionHtml = isPending 
                 ? `<div class="mt-4 pt-4 border-t border-amber-200/50">
                      <p class="text-sm font-semibold text-amber-700 mb-3">Ömer Hoca sorunuzu inceliyor...</p>
-                     <a href="${data.question_link}" target="_blank" class="block">
-                       <img src="${data.question_link}" class="w-full max-w-sm rounded-lg border border-amber-200/50 shadow-sm object-contain" alt="Soru Görseli" loading="lazy">
-                     </a>
+                     <img src="${data.question_link}" onclick="openImageModal('${data.question_link}', event)" class="h-48 w-full object-cover rounded-md cursor-pointer hover:opacity-90 transition-opacity shadow-sm" alt="Soru Görseli" loading="lazy">
                    </div>`
                 : `<div class="mt-4 pt-4 border-t border-emerald-200/50">
                      <p class="text-sm font-bold text-emerald-700 mb-3">Çözümün hazır!</p>
                      <div class="flex flex-col gap-4">
                        <div>
                          <p class="text-xs font-bold text-slate-500 mb-1 uppercase tracking-wide">Sorun:</p>
-                         <a href="${data.question_link}" target="_blank" class="block">
-                           <img src="${data.question_link}" class="w-full max-w-xs rounded-lg border border-emerald-200/50 shadow-sm object-contain opacity-75 hover:opacity-100 transition-opacity" alt="Soru Görseli" loading="lazy">
-                         </a>
+                         <img src="${data.question_link}" onclick="openImageModal('${data.question_link}', event)" class="h-32 w-full object-cover rounded-md cursor-pointer hover:opacity-90 transition-opacity border border-emerald-200/50 shadow-sm" alt="Soru Görseli" loading="lazy">
                        </div>
                        <div>
                          <p class="text-xs font-bold text-emerald-600 mb-1 uppercase tracking-wide">Çözüm:</p>
-                         <a href="${data.solution_link}" target="_blank" class="block">
-                           <img src="${data.solution_link}" class="w-full max-w-md rounded-lg border-2 border-emerald-400 shadow-md object-contain" alt="Çözüm Görseli" loading="lazy">
-                         </a>
+                         <img src="${data.solution_link}" onclick="openImageModal('${data.solution_link}', event)" class="h-48 w-full object-cover rounded-md cursor-pointer hover:opacity-90 transition-opacity border-2 border-emerald-400 shadow-md" alt="Çözüm Görseli" loading="lazy">
                        </div>
                      </div>
                    </div>`;
@@ -919,6 +971,113 @@
       } finally {
         btn.innerHTML = origText;
         btn.disabled = false;
+      }
+    });
+
+    // ÖDEVLERİM (HOMEWORKS) LOGIC
+    const odevlerGrid = document.getElementById('odevler-grid');
+    const loadingOdev = document.getElementById('loading-odev');
+    const emptyOdev = document.getElementById('empty-odev');
+
+    window.markHomeworkCompleted = async (docId) => {
+      try {
+        const { updateDoc, doc } = await import("https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js");
+        await updateDoc(doc(db, "homeworks", docId), {
+          status: 'Tamamlandı'
+        });
+      } catch (error) {
+        console.error("Ödev güncellenirken hata:", error);
+        alert("Güncellenirken hata oluştu: " + error.message);
+      }
+    };
+
+    onAuthStateChanged(auth, async (user) => {
+      if (user && user.email !== 'omerfarukmetin037@gmail.com') {
+        const { query, where } = await import("https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js");
+        
+        loadingOdev.classList.remove('hidden');
+        emptyOdev.classList.add('hidden');
+
+        try {
+          const hwQuery = query(
+            collection(db, "homeworks"),
+            where("student_email", "==", user.email)
+          );
+
+          onSnapshot(hwQuery, (snapshot) => {
+            loadingOdev.classList.add('hidden');
+            odevlerGrid.innerHTML = '';
+            
+            if (snapshot.empty) {
+              emptyOdev.classList.remove('hidden');
+              return;
+            } else {
+              emptyOdev.classList.add('hidden');
+            }
+
+            const homeworks = [];
+            snapshot.forEach((docSnap) => {
+              homeworks.push({ id: docSnap.id, ...docSnap.data() });
+            });
+
+            // Sort by status ('Bekliyor' first) then by due_date
+            homeworks.sort((a, b) => {
+              if (a.status !== b.status) {
+                return a.status === 'Bekliyor' ? -1 : 1;
+              }
+              const dateA = new Date(a.due_date || 0);
+              const dateB = new Date(b.due_date || 0);
+              return dateA - dateB;
+            });
+
+            homeworks.forEach(data => {
+              const isCompleted = data.status === 'Tamamlandı';
+              
+              const card = document.createElement('div');
+              card.className = `p-6 rounded-3xl border shadow-sm flex flex-col h-full transition-all ${
+                isCompleted 
+                  ? 'bg-green-50 border-green-100 opacity-80' 
+                  : 'bg-white border-slate-100 hover:shadow-md'
+              }`;
+
+              const statusBadge = isCompleted 
+                ? `<span class="inline-flex items-center gap-1 px-3 py-1 bg-green-100 text-green-700 text-xs font-black rounded-full"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg> Tamamlandı</span>`
+                : `<span class="inline-flex items-center gap-1 px-3 py-1 bg-amber-100 text-amber-700 text-xs font-black rounded-full"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Bekliyor</span>`;
+
+              const dateText = data.due_date ? new Date(data.due_date).toLocaleDateString('tr-TR') : 'Belirtilmedi';
+              
+              const actionButton = !isCompleted 
+                ? `<button onclick="markHomeworkCompleted('${data.id}')" class="w-full mt-auto bg-[#0047ff] text-white py-3 rounded-xl font-bold hover:bg-blue-700 transition-colors shadow-md active:scale-95 flex items-center justify-center gap-2">
+                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+                     Görevi Tamamladım
+                   </button>`
+                : `<div class="w-full mt-auto bg-green-100 text-green-700 py-3 rounded-xl font-bold text-center border border-green-200">
+                     Ödev Tamamlandı
+                   </div>`;
+
+              card.innerHTML = `
+                <div class="flex justify-between items-start mb-4">
+                  ${statusBadge}
+                  <div class="text-right">
+                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">Son Teslim</p>
+                    <p class="text-sm font-black ${isCompleted ? 'text-green-700' : 'text-red-500'}">${dateText}</p>
+                  </div>
+                </div>
+                <h3 class="text-xl font-black text-slate-900 mb-2 leading-tight">${data.title}</h3>
+                <p class="text-slate-600 font-medium text-sm mb-6 flex-1 whitespace-pre-wrap">${data.description}</p>
+                ${actionButton}
+              `;
+              
+              odevlerGrid.appendChild(card);
+            });
+          }, (error) => {
+            console.error("Ödev okuma hatası:", error);
+            emptyOdev.classList.remove('hidden');
+            emptyOdev.innerHTML = `<p class="text-red-500 font-bold mb-2">Veriler yüklenirken hata oluştu.</p><p class="text-sm text-slate-500 max-w-md mx-auto">${error.message}</p>`;
+          });
+        } catch (err) {
+          console.error("Firebase hata:", err);
+        }
       }
     });
 
