@@ -124,12 +124,32 @@
 
     const days = ["Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi", "Pazar"];
     const hours = [
-      "09:00 - 10:00", "10:00 - 11:00", "11:00 - 12:00", "12:00 - 13:00",
-      "13:00 - 14:00", "14:00 - 15:00", "15:00 - 16:00", "16:00 - 17:00",
-      "17:00 - 18:00", "18:00 - 19:00", "19:00 - 20:00", "20:00 - 21:00"
+      "12:00 - 13:00", "13:00 - 14:00", "14:00 - 15:00", "15:00 - 16:00",
+      "16:00 - 17:00", "17:00 - 18:00", "18:00 - 19:00", "19:00 - 20:00",
+      "20:00 - 21:00"
     ];
 
     const calendarBody = document.getElementById('calendar-body');
+
+    const colors = [
+      'bg-red-100 text-red-800 border-red-200 hover:bg-red-200', 
+      'bg-green-100 text-green-800 border-green-200 hover:bg-green-200', 
+      'bg-purple-100 text-purple-800 border-purple-200 hover:bg-purple-200', 
+      'bg-yellow-100 text-yellow-800 border-yellow-200 hover:bg-yellow-200', 
+      'bg-pink-100 text-pink-800 border-pink-200 hover:bg-pink-200', 
+      'bg-indigo-100 text-indigo-800 border-indigo-200 hover:bg-indigo-200', 
+      'bg-teal-100 text-teal-800 border-teal-200 hover:bg-teal-200', 
+      'bg-orange-100 text-orange-800 border-orange-200 hover:bg-orange-200'
+    ];
+
+    function getStudentColor(name) {
+      if (!name) return colors[0];
+      let sum = 0;
+      for (let i = 0; i < name.length; i++) {
+        sum += name.charCodeAt(i);
+      }
+      return colors[sum % colors.length];
+    }
 
     // Admin override silme
     window.deleteSlot = async (docId, studentName) => {
@@ -171,7 +191,8 @@
 
           if(slotData) {
             // Dolu blok
-            cell.className = 'relative flex flex-col items-center justify-center rounded-xl font-bold text-xs p-1 text-center bg-blue-100 text-[#0047ff] border border-blue-200 cursor-pointer hover:bg-blue-200 transition-colors group';
+            const colorClass = getStudentColor(slotData.student_name);
+            cell.className = `relative flex flex-col items-center justify-center rounded-xl font-bold text-xs p-1 text-center border cursor-pointer transition-colors shadow-sm group ${colorClass}`;
             cell.innerHTML = `
               <span class="truncate w-full block px-1">${slotData.student_name.split(' ')[0]}</span>
               <span class="opacity-0 group-hover:opacity-100 absolute inset-0 flex items-center justify-center bg-red-500 text-white rounded-xl text-xs font-black transition-opacity">İptal Et</span>

@@ -152,6 +152,14 @@
               Gönder
             </button>
           </form>
+
+          <h3 class="font-bold text-slate-900 mt-8 mb-4 border-b pb-2">Gönderilen Fasiküller / Dökümanlar</h3>
+          <div id="pdf-empty" class="text-center py-6 bg-slate-50 rounded-2xl border border-dashed border-slate-200 hidden">
+            <p class="text-slate-500 font-bold text-sm">Bu öğrenciye atanmış özel döküman bulunmuyor.</p>
+          </div>
+          <div id="pdf-grid" class="grid grid-cols-1 gap-4">
+            <!-- PDFler JS ile buraya yüklenecek -->
+          </div>
         </div>
 
         <div class="bg-white p-6 md:p-8 rounded-[2rem] shadow-sm border border-slate-100 mb-8">
@@ -365,6 +373,7 @@
     let currentSelectedStudentEmail = null;
 
     let currentHwUnsubscribe = null;
+    let currentPdfUnsubscribe = null;
 
     window.closeDetailView = () => {
       detailView.classList.add('hidden');
@@ -376,6 +385,10 @@
       if (currentHwUnsubscribe) {
         currentHwUnsubscribe();
         currentHwUnsubscribe = null;
+      }
+      if (currentPdfUnsubscribe) {
+        currentPdfUnsubscribe();
+        currentPdfUnsubscribe = null;
       }
       currentSelectedStudentEmail = null;
     };
@@ -393,6 +406,7 @@
       if(email) {
         loadStudentQuestions(email);
         loadStudentHomeworks(email);
+        loadStudentPdfs(email);
       }
     };
 
@@ -661,6 +675,102 @@
         });
       } catch (err) {
         console.error("Ödev dinleme hatası:", err);
+      }
+    }
+
+    // --- PDF LOGIC ---
+    const pdfGrid = document.getElementById('pdf-grid');
+    const pdfEmpty = document.getElementById('pdf-empty');
+
+    window.deletePdfAdmin = async (docId) => {
+      if(confirm('Bu özel fasikülü silmek istediğinize emin misiniz?')) {
+        try {
+          await deleteDoc(doc(db, "pdfs", docId));
+        } catch(err) {
+          console.error("PDF silme hatası:", err);
+          alert("Silinirken hata oluştu: " + err.message);
+        }
+      }
+    };
+
+    function loadStudentPdfs(studentEmail) {
+      if (currentPdfUnsubscribe) {
+        currentPdfUnsubscribe();
+      }
+
+      pdfGrid.innerHTML = '<div class="text-center py-6 text-slate-500">PDFler yükleniyor...</div>';
+      pdfEmpty.classList.add('hidden');
+
+      try {
+        const q = query(collection(db, "pdfs"), where("assigned_to", "==", studentEmail));
+        
+        currentPdfUnsubscribe = onSnapshot(q, (snapshot) => {
+          pdfGrid.innerHTML = '';
+          
+          if (snapshot.empty) {
+            pdfEmpty.classList.remove('hidden');
+            return;
+          } else {
+            pdfEmpty.classList.add('hidden');
+          }
+
+          const docsArray = [];
+          snapshot.forEach(docSnap => {
+            docsArray.push({ id: docSnap.id, data: docSnap.data() });
+          });
+
+          // Zamana göre ters sırala
+          docsArray.sort((a, b) => {
+             const getMillis = (timestamp) => {
+               if (!timestamp) return 0;
+               if (typeof timestamp.toMillis === 'function') return timestamp.toMillis();
+               if (typeof timestamp.toDate === 'function') return timestamp.toDate().getTime();
+               if (timestamp instanceof Date) return timestamp.getTime();
+               return new Date(timestamp).getTime() || 0;
+             };
+             return getMillis(b.data.createdAt) - getMillis(a.data.createdAt);
+          });
+
+          docsArray.forEach(docObj => {
+            const data = docObj.data;
+            const docId = docObj.id;
+            
+            const card = document.createElement('div');
+            card.className = `p-5 rounded-2xl border border-slate-100 bg-white shadow-sm flex flex-col md:flex-row md:items-center gap-4`;
+            
+            let dateStr = '-';
+            if (data.createdAt) {
+              if (typeof data.createdAt.toDate === 'function') {
+                dateStr = data.createdAt.toDate().toLocaleDateString('tr-TR');
+              } else {
+                dateStr = new Date(data.createdAt).toLocaleDateString('tr-TR');
+              }
+            }
+            const link = data.url || data.fileUrl || '#';
+
+            card.innerHTML = `
+              <div class="flex-1">
+                <div class="flex items-center gap-3 mb-2">
+                  <h4 class="font-black text-slate-900">${data.title}</h4>
+                  <span class="px-2.5 py-1 bg-red-50 text-red-600 text-[10px] font-black rounded-full uppercase tracking-wider">Özel Döküman</span>
+                </div>
+                <p class="text-sm text-slate-600 mb-3">${data.description || 'Bu materyal size özel olarak atanmıştır.'}</p>
+                <div class="text-xs font-bold text-slate-400">Gönderim Tarihi: <span class="text-slate-600">${dateStr}</span></div>
+              </div>
+              <div class="flex flex-row md:flex-col gap-2 shrink-0 w-full md:w-auto">
+                <a href="${link}" target="_blank" rel="noopener noreferrer" class="px-4 py-2 bg-blue-50 text-[#0047ff] hover:bg-[#0047ff] hover:text-white font-bold text-xs rounded-xl text-center transition-colors flex-1 md:flex-none">
+                  Görüntüle
+                </a>
+                <button onclick="deletePdfAdmin('${docId}')" class="px-4 py-2 bg-red-50 text-red-500 hover:bg-red-100 font-bold text-xs rounded-xl transition-colors flex-1 md:flex-none">
+                  Sil
+                </button>
+              </div>
+            `;
+            pdfGrid.appendChild(card);
+          });
+        });
+      } catch (err) {
+        console.error("PDF dinleme hatası:", err);
       }
     }
 
